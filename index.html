@@ -37,7 +37,7 @@
   --green:     #28CD41;
   --orange:    #FF6B2B;
   --sans:      'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --serif:     'Fraunces', Georgia, serif;
+  --serif:     'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --mono:      'IBM Plex Mono', 'SF Mono', monospace;
   --ease:      cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -139,7 +139,7 @@ a{color:inherit;text-decoration:none}
 /* The headline — the whole reason this page exists */
 .hero-h {
   font-family: var(--serif);
-  font-size: clamp(60px, 10vw, 140px);
+  font-size: clamp(44px, 6vw, 76px);
   font-weight: 500;
   letter-spacing: -0.045em;
   line-height: 0.96;
@@ -171,7 +171,7 @@ a{color:inherit;text-decoration:none}
 }
 
 .hero-sub {
-  font-size: clamp(16px, 2vw, 21px);
+  font-size: clamp(15px, 1.6vw, 18px);
   font-weight: 300; line-height: 1.65;
   color: var(--ink-3);
   max-width: 520px; margin: 0 auto 48px;
@@ -259,32 +259,28 @@ a{color:inherit;text-decoration:none}
 .live-card {
   background: var(--white);
   border: 1px solid var(--line);
-  border-radius: 28px;
+  border-radius: 24px;
   overflow: hidden;
   box-shadow:
-    0 1px 2px rgba(0,0,0,0.04),
-    0 8px 32px rgba(0,0,0,0.06),
-    0 32px 80px rgba(0,0,0,0.05);
+    0 1px 2px rgba(0,0,0,0.03),
+    0 12px 40px rgba(0,0,0,0.05);
 }
 
 .lc-bar {
-  padding: 18px 28px;
+  padding: 16px 28px;
   border-bottom: 1px solid var(--line);
   display: flex; align-items: center; justify-content: space-between;
   background: var(--off-2);
 }
-.lc-dots { display: flex; gap: 7px; }
-.lc-dot { width: 12px; height: 12px; border-radius: 50%; }
-.lc-dot:nth-child(1){ background: #FF5F57; }
-.lc-dot:nth-child(2){ background: #FFBD2E; }
-.lc-dot:nth-child(3){ background: #28CA41; }
 .lc-title {
-  font-family: var(--mono); font-size: 11px;
-  color: var(--ink-4); letter-spacing: 0.06em;
+  font-family: var(--mono); font-size: 10px;
+  color: var(--ink-4); letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 .lc-live {
   display: flex; align-items: center; gap: 6px;
-  font-family: var(--mono); font-size: 11px; color: var(--green);
+  font-family: var(--mono); font-size: 10px; color: var(--ink-3);
+  letter-spacing: 0.1em; text-transform: uppercase;
 }
 .lc-live-dot {
   width: 5px; height: 5px; border-radius: 50%;
@@ -295,46 +291,49 @@ a{color:inherit;text-decoration:none}
 .lc-body { display: grid; grid-template-columns: 1fr 1fr; }
 
 .lc-left {
-  padding: 40px 36px;
-  border-right: 1px solid var(--line);
-  display: flex; flex-direction: column; gap: 20px;
+  padding: 44px 40px;
+  display: flex; flex-direction: column; gap: 24px;
+  position: relative;
+}
+.lc-left::after {
+  content:''; position:absolute; top:44px; bottom:44px; right:0;
+  width: 1px; background: var(--line);
 }
 .lc-right {
-  padding: 40px 36px;
-  display: flex; flex-direction: column; gap: 20px;
+  padding: 44px 40px;
+  display: flex; flex-direction: column; gap: 24px;
 }
 
 .lc-meta-row { display: flex; align-items: center; gap: 10px; }
 .lc-platform {
   font-family: var(--mono); font-size: 9px;
-  letter-spacing: 0.12em; text-transform: uppercase;
+  letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--ink-4);
-  background: var(--off); padding: 3px 8px; border-radius: 4px;
 }
 .lc-handle {
-  font-weight: 600; font-size: 14px; color: var(--ink);
+  font-weight: 500; font-size: 15px; color: var(--ink);
   letter-spacing: -0.01em;
 }
-.lc-bio { font-size: 12px; color: var(--ink-4); }
+.lc-bio { font-size: 12px; color: var(--ink-4); font-weight: 300; }
 
 .lc-corridor {
   display: inline-flex; align-items: center; gap: 6px;
   font-family: var(--mono); font-size: 11px;
-  color: var(--blue); background: var(--blue-dim);
+  color: var(--ink-3); background: var(--off);
   padding: 5px 12px; border-radius: 6px; width: fit-content;
-  font-weight: 500; letter-spacing: 0.04em;
+  font-weight: 500; letter-spacing: 0.06em;
 }
 
 .lc-quote {
-  font-size: 15px; line-height: 1.65;
+  font-size: 15px; line-height: 1.7;
   color: var(--ink-2);
-  font-style: italic; border-left: 2px solid var(--line);
-  padding-left: 16px;
+  font-weight: 300;
+  font-style: italic;
 }
 /* Typing cursor */
 .lc-quote .cursor {
-  display: inline-block; width: 2px; height: 1em;
-  background: var(--ink-3); vertical-align: text-bottom;
+  display: inline-block; width: 1.5px; height: 1em;
+  background: var(--ink-4); vertical-align: text-bottom;
   margin-left: 2px;
   animation: blink 0.8s step-end infinite;
 }
@@ -342,33 +341,36 @@ a{color:inherit;text-decoration:none}
 
 .lc-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .lc-tag {
-  font-size: 11px; color: var(--ink-3);
-  background: var(--off); border: 1px solid var(--line);
-  padding: 3px 10px; border-radius: 5px;
+  font-size: 11px; font-weight: 400; color: var(--ink-4);
+  background: transparent; border: 1px solid var(--line);
+  padding: 4px 11px; border-radius: 980px;
 }
 
 /* Score meter */
-.score-section { display: flex; flex-direction: column; gap: 10px; }
+.score-section { display: flex; flex-direction: column; gap: 12px; }
 .score-top { display: flex; align-items: baseline; gap: 4px; }
 .score-num {
-  font-family: var(--serif);
-  font-size: 72px; font-weight: 500;
-  color: var(--ink); letter-spacing: -0.05em; line-height: 1;
+  font-family: var(--sans);
+  font-size: 56px; font-weight: 300;
+  color: var(--ink); letter-spacing: -0.03em; line-height: 1;
 }
 .score-den {
-  font-family: var(--mono); font-size: 18px;
-  color: var(--ink-5); align-self: flex-end; padding-bottom: 6px;
+  font-family: var(--mono); font-size: 15px;
+  color: var(--ink-5); align-self: flex-end; padding-bottom: 5px;
 }
-.score-label { font-size: 12px; color: var(--ink-4); }
+.score-label {
+  font-size: 11px; color: var(--ink-4);
+  text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;
+}
 
 .score-track {
-  height: 4px; background: var(--off);
+  height: 3px; background: var(--off);
   border-radius: 2px; overflow: hidden;
   position: relative;
 }
 .score-fill {
   height: 100%; border-radius: 2px;
-  background: linear-gradient(90deg, var(--ink-5) 0%, var(--ink) 100%);
+  background: var(--ink);
   width: 0%; transition: width 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -376,25 +378,25 @@ a{color:inherit;text-decoration:none}
 
 /* Outreach */
 .outreach-box {
-  background: #F0FBF4;
-  border: 1px solid rgba(40,205,65,0.16);
+  background: var(--off);
+  border: 1px solid var(--line);
   border-radius: 14px;
   padding: 18px 20px;
-  display: flex; flex-direction: column; gap: 6px;
+  display: flex; flex-direction: column; gap: 8px;
 }
 .outreach-lbl {
-  font-size: 10px; font-weight: 600;
-  color: #1A8A38; text-transform: uppercase; letter-spacing: 0.1em;
+  font-size: 10px; font-weight: 500;
+  color: var(--ink-4); text-transform: uppercase; letter-spacing: 0.12em;
 }
-.outreach-text { font-size: 13px; line-height: 1.6; color: #1E5B30; }
+.outreach-text { font-size: 13px; font-weight: 300; line-height: 1.65; color: var(--ink-2); }
 
 /* Destination chips */
 .dest-row { display: flex; gap: 8px; align-items: center; }
 .dest-label { font-size: 11px; color: var(--ink-4); margin-right: 2px; }
 .dest-chip {
-  font-size: 11px; font-weight: 500;
-  padding: 4px 10px; border-radius: 6px;
-  color: var(--ink-3); background: var(--off);
+  font-size: 11px; font-weight: 400;
+  padding: 4px 11px; border-radius: 980px;
+  color: var(--ink-3); background: transparent;
   border: 1px solid var(--line);
 }
 
@@ -805,7 +807,7 @@ footer {
   .nav-links .nav-a { display: none; }
 }
 @media (max-width: 640px) {
-  .hero-h { font-size: clamp(48px, 12vw, 80px); }
+  .hero-h { font-size: clamp(34px, 10vw, 48px); }
   .statement { padding: 100px 24px; }
   .section { padding: 100px 24px; }
   .how-step { padding: 0 0 36px; }
@@ -814,6 +816,205 @@ footer {
   .tier { grid-template-columns: 50px 1fr; gap: 14px; }
   #cta { padding: 120px 24px; }
 }
+/* ═══════════════════════════════════════════
+   GOD-TIER MICRO-INTERACTIONS
+═══════════════════════════════════════════ */
+
+/* Nav link underline sweep */
+.nav-a { position: relative; }
+.nav-a::after {
+  content:''; position:absolute; left:0; bottom:-6px;
+  width:100%; height:1px; background:var(--ink);
+  transform: scaleX(0); transform-origin: right;
+  transition: transform 0.35s var(--ease);
+}
+.nav-a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+.nav-logo { transition: letter-spacing 0.4s var(--ease), opacity 0.3s; }
+.nav-logo:hover { letter-spacing: 0.01em; opacity: 0.7; }
+
+/* Hero cursor-follow glow */
+#hero { isolation: isolate; }
+.hero-glow {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(420px circle at var(--mx,50%) var(--my,30%), rgba(0,102,204,0.07), transparent 70%);
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+#hero.glow-active .hero-glow { opacity: 1; }
+
+/* Hero grid subtle drift */
+#hero::before {
+  animation: gridDrift 40s linear infinite;
+}
+@keyframes gridDrift {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 80px 80px, 80px 80px; }
+}
+
+/* Pip on hero tag gets a little hover bump */
+.hero-tag:hover .pip { transform: scale(1.4); }
+.pip { transition: transform 0.3s var(--ease); }
+
+/* CTA buttons: ripple */
+.cta-main, .cta-ghost, .cta-btn, .nav-btn {
+  position: relative; overflow: hidden;
+  will-change: transform;
+}
+.cta-main::before, .cta-btn::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, transparent 60%);
+  opacity:0; transform: scale(0.4);
+  transition: opacity 0.5s, transform 0.6s;
+  pointer-events:none;
+}
+.cta-main:active::before, .cta-btn:active::before { opacity:1; transform: scale(1.6); transition: 0s; }
+
+/* Arrow nudge on CTA hover */
+.cta-main svg, .cta-btn svg { transition: transform 0.35s var(--ease); }
+.cta-main:hover svg, .cta-btn:hover svg { transform: translateX(4px); }
+.cta-ghost { transition: border-color 0.2s, color 0.2s, transform 0.3s var(--ease), gap 0.3s; }
+.cta-ghost:hover { gap: 12px; }
+
+/* Live card: tilt-ready + richer shadow on hover */
+.live-card {
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.live-card:hover {
+  box-shadow:
+    0 4px 8px rgba(0,0,0,0.05),
+    0 16px 48px rgba(0,0,0,0.09),
+    0 48px 100px rgba(0,0,0,0.08);
+}
+
+/* Tags pop on hover */
+.lc-tag, .dest-chip {
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.2s, color 0.2s;
+}
+.lc-tag:hover { transform: translateY(-2px); background: var(--ink); color: var(--white); border-color: var(--ink); }
+.dest-chip:hover { transform: translateY(-2px); border-color: var(--ink-3); color: var(--ink); }
+
+.outreach-box { transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
+.outreach-box:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(40,205,65,0.12); }
+
+/* Signal dots: ring on hover/active */
+.signal-dot-btn { position: relative; }
+.signal-dot-btn::after {
+  content:''; position:absolute; inset:-6px; border-radius:50%;
+  border: 1px solid transparent; transition: border-color 0.25s, transform 0.25s;
+  transform: scale(0.6);
+}
+.signal-dot-btn:hover::after, .signal-dot-btn.active::after { border-color: var(--ink-5); transform: scale(1); }
+
+/* Statement headings: word-by-word reveal */
+.statement-h .w {
+  display: inline-block; opacity: 0; transform: translateY(0.4em) rotate(2deg);
+  filter: blur(4px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease), filter 0.7s var(--ease);
+}
+.statement.r.in .statement-h .w { opacity:1; transform:translateY(0) rotate(0); filter: blur(0); }
+
+/* How-steps: hover lift + number flip */
+#how article { transition: transform 0.4s var(--ease); }
+#how article:hover { transform: translateY(-6px); }
+#how article > div:first-child {
+  transition: background 0.3s, color 0.3s, transform 0.4s var(--ease), border-color 0.3s;
+}
+#how article:hover > div:first-child {
+  background: var(--ink); color: var(--white); border-color: var(--ink);
+  transform: rotate(360deg);
+}
+
+/* Stat cells: lift + glow + number scale */
+#stats > div > div { transition: background 0.4s var(--ease); }
+#stats > div > div:hover { background: var(--off); }
+#stats [aria-label] {
+  display: inline-block;
+  transition: transform 0.4s var(--ease), color 0.4s var(--ease);
+}
+#stats > div > div:hover [aria-label] { transform: scale(1.05); color: var(--blue); }
+
+/* Source rows: slide + glyph spin */
+#sources article {
+  transition: background 0.35s, padding-left 0.35s var(--ease), transform 0.35s var(--ease);
+}
+#sources article:hover { background: var(--white); padding-left: 12px; }
+#sources article > span:first-child {
+  display:inline-block;
+  transition: transform 0.5s var(--ease), color 0.3s;
+}
+#sources article:hover > span:first-child { transform: rotate(15deg) scale(1.15); color: var(--ink); }
+#sources article > span:last-child { transition: transform 0.3s var(--ease); }
+#sources article:hover > span:last-child { transform: translateX(4px); }
+
+/* Who columns: lift + signal card glow */
+#who article { transition: transform 0.4s var(--ease); }
+#who article:hover { transform: translateY(-8px); }
+#who article > div:last-child {
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s;
+}
+#who article:hover > div:last-child {
+  box-shadow: 0 16px 40px rgba(0,0,0,0.07);
+  border-color: var(--ink-5);
+}
+#who article:hover .who-score,
+#who article:hover [style*="orange"] { transform: scale(1.08); display:inline-block; }
+#who article > span:first-child { transition: color 0.3s, padding-left 0.3s var(--ease); }
+#who article:hover > span:first-child { color: var(--ink); padding-left: 6px; }
+
+/* Tiers: left accent bar slides in on hover */
+#tiers article {
+  position: relative;
+  transition: background 0.3s, transform 0.3s var(--ease);
+}
+#tiers article::before {
+  content:''; position:absolute; left:0; top:8px; bottom:8px; width:3px;
+  border-radius:2px; background:var(--ink); transform: scaleY(0);
+  transition: transform 0.3s var(--ease); transform-origin: center;
+}
+#tiers article:hover { transform: translateX(4px); }
+#tiers article:hover::before { transform: scaleY(1); }
+#tiers article > span:first-child { transition: color 0.3s, transform 0.3s var(--ease); }
+#tiers article:hover > span:first-child { color: var(--ink); transform: translateX(2px); }
+
+/* Tier chips: subtle pulse on the hot one */
+.tc-orange { animation: chipGlow 3s ease-in-out infinite; }
+@keyframes chipGlow {
+  0%,100% { box-shadow: 0 0 0 0 rgba(255,107,43,0); }
+  50% { box-shadow: 0 0 0 4px rgba(255,107,43,0.08); }
+}
+
+/* CTA section: floating particles drift */
+#cta .particle {
+  position:absolute; border-radius:50%;
+  background: rgba(255,255,255,0.5);
+  pointer-events:none;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) translateX(0); opacity:0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-420px) translateX(var(--dx,20px)); opacity:0; }
+}
+
+/* Footer email arrow nudge */
+.footer-email { transition: color 0.2s, padding-right 0.25s var(--ease); }
+.footer-email:hover { padding-right: 4px; }
+
+/* Smooth section reveal refinement: scale-in for the live card */
+.live-card.r { transform: translateY(40px) scale(0.985); }
+.live-card.r.in { transform: none; }
+
+/* Custom scroll progress bar */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; height: 2px;
+  background: var(--ink); z-index: 1000;
+  width: 0%; transition: width 0.1s linear;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-h .row-inner, .hero-tag, .hero-sub, .hero-actions, .hero-proof, .scroll-cue, .r {
     opacity: 1 !important; transform: none !important;
@@ -821,10 +1022,22 @@ footer {
   }
   .pip, .lc-live-dot, .scroll-line { animation: none !important; }
   .score-fill { transition: none !important; }
+  #hero::before { animation: none !important; }
+  .statement-h .w { opacity:1 !important; transform:none !important; filter:none !important; }
+  #cta .particle { display: none !important; }
+  .tc-orange { animation: none !important; }
+  #how article:hover > div:first-child,
+  #how article:hover,
+  #stats > div > div:hover [aria-label],
+  #sources article:hover > span:first-child,
+  #who article:hover,
+  #tiers article:hover { transform: none !important; }
 }
 </style>
 </head>
 <body>
+
+<div id="scroll-progress" aria-hidden="true"></div>
 
 <a href="#main" style="position:absolute;top:-100%;left:16px;background:var(--blue);color:#fff;padding:8px 16px;border-radius:4px;font-size:14px;z-index:9999;transition:top .2s" onfocus="this.style.top='16px'" onblur="this.style.top='-100%'">Skip to content</a>
 
@@ -845,6 +1058,7 @@ footer {
 
 <!-- ══ HERO ══ -->
 <section id="hero" aria-labelledby="hero-h">
+  <div class="hero-glow" aria-hidden="true"></div>
   <div class="hero-content">
     <p class="hero-tag">
       <span class="pip" aria-hidden="true"></span>
@@ -884,7 +1098,7 @@ footer {
 <!-- ══ STATEMENT 1 ══ -->
 <div class="statement light r" aria-hidden="true" style="padding:80px 32px; border-top:1px solid var(--line);">
   <p class="statement-kicker">The problem</p>
-  <h2 class="statement-h">Your next customer<br>posted publicly<br><em>10 minutes ago.</em></h2>
+  <h2 class="statement-h"><span class="w">Your</span> <span class="w">next</span> <span class="w">customer</span><br><span class="w">posted</span> <span class="w">publicly</span><br><em><span class="w">10</span> <span class="w">minutes</span> <span class="w">ago.</span></em></h2>
   <p class="statement-p">They are frustrated. Comparing competitors. Ready to switch. And right now they have no idea you exist.</p>
 </div>
 
@@ -895,9 +1109,6 @@ footer {
 
   <div class="live-card r">
     <div class="lc-bar">
-      <div class="lc-dots" aria-hidden="true">
-        <div class="lc-dot"></div><div class="lc-dot"></div><div class="lc-dot"></div>
-      </div>
       <span class="lc-title">flintel · #fx-signals-urgent</span>
       <div class="lc-live" aria-label="Live feed active">
         <span class="lc-live-dot" aria-hidden="true"></span>live
@@ -996,7 +1207,7 @@ footer {
 <!-- ══ STATEMENT DARK ══ -->
 <div class="statement dark r">
   <p class="statement-kicker">The reality</p>
-  <h2 class="statement-h" style="color:var(--white);">The hottest lead<br>you will ever see is someone<br>who just left <em>your competitor.</em></h2>
+  <h2 class="statement-h" style="color:var(--white);"><span class="w">The</span> <span class="w">hottest</span> <span class="w">lead</span><br><span class="w">you</span> <span class="w">will</span> <span class="w">ever</span> <span class="w">see</span> <span class="w">is</span> <span class="w">someone</span><br><span class="w">who</span> <span class="w">just</span> <span class="w">left</span> <em><span class="w">your</span> <span class="w">competitor.</span></em></h2>
   <p class="statement-p">They have already made the decision to leave. All they need now is someone to reach them first with the right message.</p>
 </div>
 
@@ -1158,6 +1369,7 @@ footer {
 
 <!-- ══ CTA ══ -->
 <section id="cta" aria-labelledby="cta-h">
+  <div id="cta-particles" aria-hidden="true" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;"></div>
   <div class="cta-inner r">
     <p class="cta-eyebrow">Get started</p>
     <h2 class="cta-h" id="cta-h">Your buyers are<br>choosing someone <em>today.</em></h2>
@@ -1306,7 +1518,124 @@ const ro = new IntersectionObserver((entries) => {
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.r').forEach(el => ro.observe(el));
 
-/* ── SMOOTH SCROLL ── */
+/* ── SCROLL PROGRESS BAR ── */
+const progressBar = document.getElementById('scroll-progress');
+function updateProgress() {
+  const h = document.documentElement;
+  const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  progressBar.style.width = pct + '%';
+}
+window.addEventListener('scroll', updateProgress, { passive: true });
+updateProgress();
+
+/* ── HERO CURSOR GLOW ── */
+const hero = document.getElementById('hero');
+hero.addEventListener('pointermove', (e) => {
+  const r = hero.getBoundingClientRect();
+  hero.style.setProperty('--mx', `${e.clientX - r.left}px`);
+  hero.style.setProperty('--my', `${e.clientY - r.top}px`);
+  hero.classList.add('glow-active');
+});
+hero.addEventListener('pointerleave', () => hero.classList.remove('glow-active'));
+
+/* ── LIVE CARD 3D TILT ── */
+const liveCard = document.querySelector('.live-card');
+if (liveCard) {
+  liveCard.addEventListener('pointermove', (e) => {
+    const r = liveCard.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    liveCard.style.transform = `perspective(1200px) rotateY(${px * 4}deg) rotateX(${-py * 4}deg) translateY(-4px)`;
+  });
+  liveCard.addEventListener('pointerleave', () => {
+    liveCard.style.transform = '';
+  });
+}
+
+/* ── CTA PARTICLES ── */
+const particleHost = document.getElementById('cta-particles');
+if (particleHost) {
+  for (let i = 0; i < 24; i++) {
+    const p = document.createElement('span');
+    p.className = 'particle';
+    const size = 2 + Math.random() * 3;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.bottom = '-10px';
+    p.style.setProperty('--dx', (Math.random() * 60 - 30) + 'px');
+    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+    p.style.animationDelay = (Math.random() * 12) + 's';
+    particleHost.appendChild(p);
+  }
+}
+
+/* ── STAT COUNTERS ── */
+function animateCount(el, target, suffix, duration = 1400) {
+  const start = performance.now();
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    let val;
+    if (Number.isInteger(target)) {
+      val = Math.floor(eased * target);
+    } else {
+      val = (eased * target).toFixed(1);
+    }
+    el.textContent = val + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = target + suffix;
+  }
+  requestAnimationFrame(step);
+}
+
+const statConfigs = [
+  { match: '90s', target: 90, suffix: 's' },
+  { match: '95%', target: 95, suffix: '%' }
+];
+document.querySelectorAll('#stats [aria-label]').forEach(el => {
+  const text = el.textContent.trim();
+  if (text === '90s') { el.dataset.target = 90; el.dataset.suffix = 's'; }
+  else if (text === '95%') { el.dataset.target = 95; el.dataset.suffix = '%'; }
+  else { el.dataset.skip = '1'; } // 24/7 stays static
+});
+
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      if (!el.dataset.skip) {
+        animateCount(el, parseFloat(el.dataset.target), el.dataset.suffix);
+      }
+      statsObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('#stats [aria-label]').forEach(el => statsObserver.observe(el));
+
+/* ── STAGGERED REVEAL FOR LIST ITEMS ── */
+function staggerReveal(selector, step = 70) {
+  document.querySelectorAll(selector).forEach((el, i) => {
+    el.classList.add('r');
+    el.style.transitionDelay = (i * step) + 'ms';
+  });
+}
+staggerReveal('#sources article');
+staggerReveal('#who article');
+staggerReveal('#tiers article');
+staggerReveal('#how article');
+
+/* Re-run scroll reveal observer to catch newly-added .r elements */
+document.querySelectorAll('.r').forEach(el => {
+  if (!el.classList.contains('in')) ro.observe(el);
+});
+
+/* ── STATEMENT WORD REVEAL via the same .r observer ── */
+document.querySelectorAll('.statement').forEach(el => {
+  el.classList.add('r');
+  ro.observe(el);
+});
+
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const t = document.querySelector(a.getAttribute('href'));
