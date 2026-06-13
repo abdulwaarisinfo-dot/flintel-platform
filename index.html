@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="main, follow">
 <title>Flintel — Signal Intelligence for Fintech & FX</title>
 <meta name="description" content="Flintel monitors Twitter, Reddit and Telegram 24/7. The moment a fintech buyer shows intent, your team gets the signal and the outreach script — in 90 seconds.">
 <link rel="canonical" href="https://getflintel.com/">
@@ -56,7 +56,7 @@ a{color:inherit;text-decoration:none}
    NAV
 ═══════════════════════════════════════════ */
 #nav {
-  position: fixed; top:0; left:0; right:0; z-index:999;
+  position: fixed; top:0; left:0; right:0; --z-main:999;
   height: 52px;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 40px;
@@ -114,7 +114,7 @@ a{color:inherit;text-decoration:none}
   pointer-events: none;
 }
 
-.hero-content { position:relative; z-index:1; }
+.hero-content { position:relative; --z-main:1; }
 
 .hero-tag {
   display: inline-flex; align-items: center; gap: 8px;
@@ -641,7 +641,7 @@ a{color:inherit;text-decoration:none}
   -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%);
   pointer-events: none;
 }
-.cta-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+.cta-inner { position: relative; --z-main: 1; display: flex; flex-direction: column; align-items: center; }
 .cta-eyebrow {
   font-family: var(--mono); font-size: 11px;
   letter-spacing: 0.12em; text-transform: uppercase;
@@ -740,7 +740,9 @@ footer {
 
 #hero { isolation: isolate; }
 .hero-glow {
-  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  position: absolute; inset: 0;
+  --z-main: 0; 
+  pointer-events: none;
   background: radial-gradient(420px circle at var(--mx,50%) var(--my,30%), rgba(0,102,204,0.07), transparent 70%);
   transition: opacity 0.3s; opacity: 0;
 }
@@ -854,7 +856,7 @@ footer {
 
 #scroll-progress {
   position: fixed; top: 0; left: 0; height: 2px;
-  background: var(--ink); z-index: 1000;
+  background: var(--ink); --z-main: 1000;
   width: 0%; transition: width 0.1s linear;
 }
 
@@ -882,7 +884,7 @@ footer {
 
 <div id="scroll-progress" aria-hidden="true"></div>
 
-<a href="#main" style="position:absolute;top:-100%;left:16px;background:var(--blue);color:#fff;padding:8px 16px;border-radius:4px;font-size:14px;z-index:9999;transition:top .2s" onfocus="this.style.top='16px'" onblur="this.style.top='-100%'">Skip to content</a>
+<a href="#main" style="position:absolute;top:-100%;left:16px;background:var(--blue);color:#fff;padding:8px 16px;border-radius:4px;font-size:14px;--z-main:9999;transition:top .2s" onfocus="this.style.top='16px'" onblur="this.style.top='-100%'">Skip to content</a>
 
 <!-- NAV -->
 <header>
@@ -1024,21 +1026,21 @@ footer {
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;" class="r d1">
       <div style="content:'';position:absolute;top:20px;left:calc(100%/6);width:calc(100% - 100%/3);height:1px;background:var(--line);"></div>
       <article style="display:flex;flex-direction:column;gap:20px;padding-right:56px;">
-        <div style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);position:relative;z-index:1;flex-shrink:0;">01</div>
+        <div style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);position:relative;--z-main:1;flex-shrink:0;">01</div>
         <div style="display:flex;flex-direction:column;gap:10px;">
           <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">The Listener</h3>
           <p style="font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-3);">Monitors Twitter, Reddit, Telegram and competitor reviews continuously. Searches your exact buyer keywords across millions of posts every 60 seconds. Never sleeps. Never misses.</p>
         </div>
       </article>
       <article style="display:flex;flex-direction:column;gap:20px;padding-right:56px;">
-        <div style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);position:relative;z-index:1;flex-shrink:0;">02</div>
+        <div style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);position:relative;--z-main:1;flex-shrink:0;">02</div>
         <div style="display:flex;flex-direction:column;gap:10px;">
           <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">The Filter</h3>
           <p style="font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-3);">A two-layer system removes 95% of irrelevant content before AI ever processes it. Consumer subscriptions, wrong geography, personal payments — all eliminated instantly at zero cost.</p>
         </div>
       </article>
       <article style="display:flex;flex-direction:column;gap:20px;">
-        <div style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);position:relative;z-index:1;flex-shrink:0;">03</div>
+        <div style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);position:relative;--z-main:1;flex-shrink:0;">03</div>
         <div style="display:flex;flex-direction:column;gap:10px;">
           <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">The Intelligence</h3>
           <p style="font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-3);">AI reads each post, scores buying intent 0–10, identifies the buyer, writes the exact outreach message, and delivers a complete signal card to Slack and HubSpot in under 90 seconds.</p>
@@ -1082,25 +1084,25 @@ footer {
       <h2 style="font-family:var(--serif);font-size:clamp(36px,5vw,60px);font-weight:500;letter-spacing:-0.04em;line-height:1.08;color:var(--ink);" id="sources-h">We monitor where<br>your buyers<br><em style="font-weight:300;color:var(--ink-3);">actually talk.</em></h2>
     </div>
     <div style="display:flex;flex-direction:column;" class="r d1">
-      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);" tabindex="0">
+      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);" tabmain="0">
         <span style="font-size:24px;color:var(--ink-4);font-family:var(--mono);">𝕏</span>
         <span style="font-size:22px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">Twitter / X</span>
         <span style="font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-3);">Founders vent publicly the moment something breaks. Real-time keyword streaming across 500 million daily users. Highest urgency, highest intent.</span>
         <span style="font-size:11px;font-weight:500;color:var(--ink-3);background:var(--white);border:1px solid var(--line);padding:5px 12px;border-radius:7px;white-space:nowrap;">Primary source</span>
       </article>
-      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);" tabindex="0">
+      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);" tabmain="0">
         <span style="font-size:24px;color:var(--ink-4);font-family:var(--mono);">◈</span>
         <span style="font-size:22px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">Reddit</span>
         <span style="font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-3);">Business owners write detailed, context-rich posts in relevant communities. A complete picture of where the buyer sits in their decision journey.</span>
         <span style="font-size:11px;font-weight:500;color:var(--ink-3);background:var(--white);border:1px solid var(--line);padding:5px 12px;border-radius:7px;white-space:nowrap;">High context</span>
       </article>
-      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);" tabindex="0">
+      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);" tabmain="0">
         <span style="font-size:24px;color:var(--ink-4);font-family:var(--mono);">★</span>
         <span style="font-size:22px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">Competitor Reviews</span>
         <span style="font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-3);">Someone leaving a one-star review has already decided to leave. The hottest lead in existence. Found on Trustpilot and Google within seconds of publishing.</span>
         <span style="font-size:11px;font-weight:500;color:var(--orange);background:rgba(255,107,43,0.08);border:1px solid rgba(255,107,43,0.15);padding:5px 12px;border-radius:7px;white-space:nowrap;">Hottest signals</span>
       </article>
-      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);" tabindex="0">
+      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);" tabmain="0">
         <span style="font-size:24px;color:var(--ink-4);font-family:var(--mono);">◉</span>
         <span style="font-size:22px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">Telegram</span>
         <span style="font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-3);">Diaspora communities where buyers openly compare services and share frustrations. The intelligence layer that competitors never think to monitor.</span>
@@ -1172,7 +1174,7 @@ footer {
     </div>
     <div style="display:flex;flex-direction:column;" class="r d1" role="list">
 
-      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s;align-items:start;" onmouseenter="this.style.background='#fff'" onmouseleave="this.style.background=''" tabindex="0">
+      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s;align-items:start;" onmouseenter="this.style.background='#fff'" onmouseleave="this.style.background=''" tabmain="0">
         <span style="font-family:var(--mono);font-size:13px;color:var(--ink);font-weight:500;padding-top:3px;">8–10</span>
         <div style="display:flex;flex-direction:column;gap:5px;">
           <h3 style="font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);display:flex;align-items:center;gap:10px;flex-wrap:wrap;">Immediate <span style="font-size:11px;font-weight:500;padding:3px 10px;border-radius:6px;background:rgba(255,107,43,0.10);color:var(--orange);">Instant Slack alert</span></h3>
@@ -1181,7 +1183,7 @@ footer {
       </article>
       <div style="height:1px;background:var(--line);margin:4px 20px;"></div>
 
-      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s;align-items:start;" onmouseenter="this.style.background='#fff'" onmouseleave="this.style.background=''" tabindex="0">
+      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s;align-items:start;" onmouseenter="this.style.background='#fff'" onmouseleave="this.style.background=''" tabmain="0">
         <span style="font-family:var(--mono);font-size:13px;color:var(--ink-4);padding-top:3px;">5–7</span>
         <div style="display:flex;flex-direction:column;gap:5px;">
           <h3 style="font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);display:flex;align-items:center;gap:10px;flex-wrap:wrap;">Digest <span style="font-size:11px;font-weight:500;padding:3px 10px;border-radius:6px;background:var(--blue-dim);color:var(--blue);">Daily 8am brief</span></h3>
@@ -1190,7 +1192,7 @@ footer {
       </article>
       <div style="height:1px;background:var(--line);margin:4px 20px;"></div>
 
-      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s;align-items:start;" onmouseenter="this.style.background='#fff'" onmouseleave="this.style.background=''" tabindex="0">
+      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s;align-items:start;" onmouseenter="this.style.background='#fff'" onmouseleave="this.style.background=''" tabmain="0">
         <span style="font-family:var(--mono);font-size:13px;color:var(--ink-4);padding-top:3px;">3–4</span>
         <div style="display:flex;flex-direction:column;gap:5px;">
           <h3 style="font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);display:flex;align-items:center;gap:10px;flex-wrap:wrap;">Watchlist <span style="font-size:11px;font-weight:500;padding:3px 10px;border-radius:6px;background:var(--off);color:var(--ink-3);border:1px solid var(--line);">Silent monitoring</span></h3>
@@ -1199,7 +1201,7 @@ footer {
       </article>
       <div style="height:1px;background:var(--line);margin:4px 20px;"></div>
 
-      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s;align-items:start;" onmouseenter="this.style.background='#fff'" onmouseleave="this.style.background=''" tabindex="0">
+      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s;align-items:start;" onmouseenter="this.style.background='#fff'" onmouseleave="this.style.background=''" tabmain="0">
         <span style="font-family:var(--mono);font-size:13px;color:var(--ink-5);padding-top:3px;">0–2</span>
         <div style="display:flex;flex-direction:column;gap:5px;">
           <h3 style="font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink-3);display:flex;align-items:center;gap:10px;flex-wrap:wrap;">Discarded <span style="font-size:11px;font-weight:500;padding:3px 10px;border-radius:6px;background:var(--off);color:var(--ink-5);border:1px solid var(--line);">Never shown</span></h3>
