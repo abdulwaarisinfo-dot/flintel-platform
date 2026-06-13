@@ -343,16 +343,22 @@
 
 <body>
 
-  <nav>
-    <a class="logo" href="/">Flintel</a>
+<div id="scroll-progress" aria-hidden="true"></div>
+
+<a href="#main" style="position:absolute;top:-100%;left:16px;background:var(--blue);color:#fff;padding:8px 16px;border-radius:4px;font-size:14px;z-index:9999;transition:top .2s" onfocus="this.style.top='16px'" onblur="this.style.top='-100%'">Skip to content</a>
+
+<header>
+  <nav id="nav" aria-label="Main navigation">
+    <a href="/" class="nav-logo" aria-label="Flintel home">Flintel</a>
     <div class="nav-links">
-      <a href="/#how">How it works</a>
-      <a href="/#sources">Sources</a>
-      <a href="/#tiers">Intelligence</a>
-      <a href="/blog/find-fintech-buyers-twitter">Blog</a>
+      <a href="#how"     class="nav-a">How it works</a>
+      <a href="#sources" class="nav-a">Sources</a>
+      <a href="#tiers"   class="nav-a">Intelligence</a>
+      <a href="/blog/find-fintech-buyers-twitter"    class="nav-a">Blog</a>
+      <a href="https://calendly.com/hello-flintel/new-meeting" target="_blank" rel="noopener noreferrer" class="nav-btn">Book a call</a>
     </div>
-    <a class="cta-nav" href="https://calendly.com/hello-flintel/new-meeting">Book a 15-min call →</a>
   </nav>
+</header>
 
   <div class="hero">
     <span class="hero-tag">Signal Intelligence · B2B Fintech</span>
