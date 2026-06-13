@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Find Fintech Buyers on Twitter Before Your Competitors Do | Flintel</title>
+  <meta name="description" content="Your next fintech client posted on Twitter 10 minutes ago. They're frustrated, comparing alternatives, and ready to switch. Here's the exact system to find them first — before your competitors even open their laptops." />
+  <link rel="canonical" href="https://getflintel.com/blog/find-fintech-buyers-twitter" />
+  <meta property="og:title" content="How to Find Fintech Buyers on Twitter Before Your Competitors Do" />
+  <meta property="og:description" content="Your next fintech client posted on Twitter 10 minutes ago. Here's the exact system to find them first." />
+  <meta property="og:url" content="https://getflintel.com/blog/find-fintech-buyers-twitter" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How to Find Fintech Buyers on Twitter Before Your Competitors Do" />
+  <meta name="twitter:description" content="Your next fintech client posted on Twitter 10 minutes ago. Here's the exact system to find them first." />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --off-white: #f9f8f5;
+      --muted: #6b7280;
+      --accent: #1a1a2e;
+      --highlight: #e8f4f0;
+      --border: #e5e7eb;
+      --signal-green: #059669;
+      --signal-red: #dc2626;
+      --mono: 'IBM Plex Mono', 'Courier New', monospace;
+      --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --serif: 'Fraunces', Georgia, serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: #fff;
+      color: var(--black);
+      line-height: 1.75;
+      font-size: 18px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    nav a.logo { font-weight: 700; font-size: 1.1rem; color: var(--black); text-decoration: none; letter-spacing: -0.02em; }
+    nav .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+    nav .nav-links a { font-size: 0.875rem; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    nav .nav-links a:hover { color: var(--black); }
+    nav a.cta-nav {
+      font-size: 0.875rem;
+      background: var(--black);
+      color: #fff;
+      padding: 0.5rem 1.25rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 4rem 2rem 2rem;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--signal-green);
+      background: var(--highlight);
+      padding: 0.3rem 0.75rem;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--black);
+    }
+    .hero-intro {
+      font-size: 1.2rem;
+      color: #374151;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      border-left: 3px solid var(--black);
+      padding-left: 1.25rem;
+    }
+    .meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .meta-dot { color: var(--border); }
+
+    /* ── ARTICLE BODY ── */
+    article {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 2rem 5rem;
+    }
+    article h2 {
+      font-family: var(--serif);
+      font-size: 1.75rem;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      margin: 3rem 0 1rem;
+      color: var(--black);
+    }
+    article h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 2rem 0 0.75rem;
+      color: var(--black);
+    }
+    article p {
+      margin-bottom: 1.4rem;
+      color: #1f2937;
+    }
+    article ul, article ol {
+      margin: 0 0 1.4rem 1.5rem;
+      color: #1f2937;
+    }
+    article li { margin-bottom: 0.5rem; }
+    article a { color: var(--black); text-decoration: underline; text-underline-offset: 3px; }
+    article strong { font-weight: 600; }
+
+    /* ── SIGNAL CARD ── */
+    .signal-card {
+      background: #0d1117;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      color: #e6edf3;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+    }
+    .signal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .signal-brand { color: #58a6ff; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.05em; }
+    .signal-live { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: #3fb950; }
+    .live-dot { width: 7px; height: 7px; background: #3fb950; border-radius: 50%; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .signal-source { color: #8b949e; font-size: 0.75rem; margin-bottom: 0.5rem; }
+    .signal-user { color: #58a6ff; font-weight: 600; margin-bottom: 0.25rem; }
+    .signal-meta { color: #8b949e; font-size: 0.75rem; margin-bottom: 1rem; }
+    .signal-post {
+      background: #161b22;
+      border-left: 3px solid #3fb950;
+      padding: 1rem;
+      border-radius: 4px;
+      color: #e6edf3;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .signal-score-row { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1rem; }
+    .score-badge {
+      background: #3fb950;
+      color: #0d1117;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+    }
+    .score-label { color: #8b949e; font-size: 0.75rem; }
+    .outreach-label { color: #8b949e; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+    .outreach-text {
+      background: #161b22;
+      padding: 0.875rem;
+      border-radius: 4px;
+      color: #e6edf3;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      border: 1px solid #30363d;
+    }
+    .signal-footer { display: flex; align-items: center; gap: 0.75rem; margin-top: 1rem; }
+    .signal-channel {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      background: #21262d;
+      color: #8b949e;
+    }
+    .signal-time { color: #8b949e; font-size: 0.75rem; margin-left: auto; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      background: var(--highlight);
+      border-left: 4px solid var(--signal-green);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin: 2rem 0;
+    }
+    .callout p { margin: 0; color: #065f46; font-weight: 500; }
+    .callout-stat {
+      background: #fef3c7;
+      border-left: 4px solid #f59e0b;
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin: 2rem 0;
+    }
+    .callout-stat p { margin: 0; color: #78350f; }
+
+    /* ── KEYWORD TABLE ── */
+    .keyword-table-wrap { overflow-x: auto; margin: 1.5rem 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    thead th {
+      background: var(--black);
+      color: #fff;
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    tbody td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    tbody tr:nth-child(even) { background: var(--off-white); }
+    .intent-high { color: var(--signal-green); font-weight: 600; }
+    .intent-med { color: #d97706; font-weight: 600; }
+    .mono-text { font-family: var(--mono); font-size: 0.8rem; background: #f3f4f6; padding: 2px 6px; border-radius: 3px; }
+
+    /* ── STEP BLOCKS ── */
+    .step {
+      display: flex;
+      gap: 1.5rem;
+      margin: 2rem 0;
+      align-items: flex-start;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      background: var(--black);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-top: 2px;
+    }
+    .step-content h3 { margin-top: 0; }
+    .step-content p { margin-bottom: 0.75rem; }
+
+    /* ── CTA BLOCK ── */
+    .cta-block {
+      background: var(--black);
+      color: #fff;
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin: 3rem 0;
+      text-align: center;
+    }
+    .cta-block h2 {
+      font-family: var(--serif);
+      color: #fff;
+      margin: 0 0 1rem;
+      font-size: 1.75rem;
+    }
+    .cta-block p { color: #9ca3af; margin-bottom: 1.5rem; }
+    .cta-btn {
+      display: inline-block;
+      background: #fff;
+      color: var(--black);
+      font-weight: 700;
+      padding: 0.875rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: opacity 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.9; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--muted); }
+
+    @media (max-width: 640px) {
+      .hero { padding: 2rem 1.25rem 1.5rem; }
+      article { padding: 0 1.25rem 3rem; }
+      nav { padding: 1rem 1.25rem; }
+      .step { flex-direction: column; gap: 0.75rem; }
+      nav .nav-links a { display: none; }
+    }
+  </style>
+
+  <!-- Schema.org structured data for Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Find Fintech Buyers on Twitter Before Your Competitors Do",
+    "description": "Your next fintech client posted on Twitter 10 minutes ago. Here's the exact system to find them in real time.",
+    "author": { "@type": "Organization", "name": "Flintel" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Flintel",
+      "url": "https://getflintel.com"
+    },
+    "datePublished": "2025-06-13",
+    "url": "https://getflintel.com/blog/find-fintech-buyers-twitter"
+  }
+  </script>
+</head>
+
+<body>
+
+  <nav>
+    <a class="logo" href="/">Flintel</a>
+    <div class="nav-links">
+      <a href="/#how">How it works</a>
+      <a href="/#sources">Sources</a>
+      <a href="/#tiers">Intelligence</a>
+      <a href="/blog">Blog</a>
+    </div>
+    <a class="cta-nav" href="https://calendly.com/hello-flintel/new-meeting">Book a 15-min call →</a>
+  </nav>
+
+  <div class="hero">
+    <span class="hero-tag">Signal Intelligence · B2B Fintech</span>
+    <h1>How to Find Fintech Buyers on Twitter Before Your Competitors Do</h1>
+    <p class="hero-intro">
+      Right now, a founder is publicly tweeting about their failed cross-border payment. They're comparing your competitors, bleeding money, and ready to switch. They have no idea you exist. Here's the exact system to find them — in under 90 seconds.
+    </p>
+    <div class="meta">
+      <span>By Flintel</span>
+      <span class="meta-dot">·</span>
+      <span>June 2025</span>
+      <span class="meta-dot">·</span>
+      <span>8 min read</span>
+    </div>
+  </div>
+
+  <article>
+
+    <p>
+      Most fintech sales teams are playing the wrong game. They're cold-emailing lists, running LinkedIn ads, and waiting for inbound — while their best buyers are <strong>actively broadcasting their intent on Twitter right now, in public, for free.</strong>
+    </p>
+
+    <p>
+      A founder whose Wise Business payment just failed at 11 PM doesn't write a support ticket. They tweet. Furiously. With exactly the kind of urgency and pain language that tells you: <em>this is a buyer who will switch today.</em>
+    </p>
+
+    <p>
+      The teams that find that tweet within minutes — and respond with the right message — win the deal. The teams running the same cold email sequence they wrote six months ago? They lose it without ever knowing it existed.
+    </p>
+
+    <p>This guide shows you exactly how to build that real-time buyer detection system for your fintech sales team.</p>
+
+    <!-- SIGNAL CARD EXAMPLE -->
+    <div class="signal-card" role="img" aria-label="Example Flintel signal card showing a real buyer intent post">
+      <div class="signal-header">
+        <span class="signal-brand">FLINTEL · #fx-signals-urgent</span>
+        <span class="signal-live"><span class="live-dot"></span> live</span>
+      </div>
+      <div class="signal-source">Twitter / X</div>
+      <div class="signal-user">@chukwuemeka_biz</div>
+      <div class="signal-meta">Founder · Import Export · Toronto &nbsp;·&nbsp; CA → NG corridor</div>
+      <div class="signal-post">
+        "Bank blocked my $45k CAD Lagos supplier payment again. Third time this month. Anyone know a better cross-border solution for Canada-Nigeria transfers? Getting desperate here."
+      </div>
+      <div class="signal-score-row">
+        <div>
+          <div class="score-label">Intent score</div>
+          <div class="score-badge">9 / 10</div>
+        </div>
+      </div>
+      <div class="outreach-label">Suggested outreach</div>
+      <div class="outreach-text">
+        "We help diaspora businesses move money between Canada and Nigeria — fast, compliant, no bank blocks. We've moved over $2M through the CA-NG corridor this year alone. DM me and we sort this today."
+      </div>
+      <div class="signal-footer">
+        <span class="signal-channel">Slack</span>
+        <span class="signal-channel">HubSpot</span>
+        <span class="signal-time">Today · 14:32 UTC · delivered in 87s</span>
+      </div>
+    </div>
+
+    <p>
+      That signal above is real. That buyer is real. And the window to reach them before a competitor does is measured in <strong>hours, not days.</strong>
+    </p>
+
+    <h2>Why Twitter is the highest-intent channel in fintech B2B</h2>
+
+    <p>
+      Most intent data tools track anonymous web browsing — someone visiting a pricing page, reading a comparison blog. That's useful. But it's passive, cold, and often weeks behind the actual buying moment.
+    </p>
+
+    <p>
+      Twitter is different. When a business founder tweets about a payment failure, a blocked transaction, or a competitor that just let them down — that's not anonymous. That's not passive. That's a named individual, in a specific company, in a specific corridor, describing a specific problem they need solved <em>right now.</em>
+    </p>
+
+    <div class="callout-stat">
+      <p>
+        <strong>The first vendor to engage wins approximately 80% of deals</strong> — and 95% of the time, the winning vendor was already on the buyer's shortlist before first contact. (6sense, 2025 B2B Buyer Experience Report). On Twitter, the average B2B team takes 42–47 hours to respond to a buyer signal. The average window before intent decays: under 4 hours.
+      </p>
+    </div>
+
+    <p>
+      Twitter buyers are also <strong>more honest and more urgent</strong> than LinkedIn buyers. A founder will tweet "our payment provider is garbage and I've lost three clients because of it" at 11 PM — that's not a LinkedIn post. But it's a buying signal with a flashing neon sign. And because most sales teams aren't watching Twitter at all, <strong>the signals are there for the taking.</strong>
+    </p>
+
+    <h2>The exact buyer intent keywords to monitor in fintech</h2>
+
+    <p>
+      Not every tweet about payments is a buyer signal. The difference between noise and signal is specificity. Here are the keyword categories and patterns that consistently produce high-intent B2B leads in the fintech and FX space:
+    </p>
+
+    <div class="keyword-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Signal category</th>
+            <th>Example keyword patterns</th>
+            <th>Intent level</th>
+            <th>Why it works</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Competitor frustration</strong></td>
+            <td>
+              <span class="mono-text">"Wise failed"</span>&nbsp;
+              <span class="mono-text">"Wise alternative"</span>&nbsp;
+              <span class="mono-text">"Airwallex issues"</span>&nbsp;
+              <span class="mono-text">"OFX blocked"</span>
+            </td>
+            <td class="intent-high">Very high</td>
+            <td>Decision already made to leave. Just needs a destination.</td>
+          </tr>
+          <tr>
+            <td><strong>Payment failure</strong></td>
+            <td>
+              <span class="mono-text">"payment blocked"</span>&nbsp;
+              <span class="mono-text">"transfer failed"</span>&nbsp;
+              <span class="mono-text">"bank rejected"</span>&nbsp;
+              <span class="mono-text">"payment delayed"</span>
+            </td>
+            <td class="intent-high">Very high</td>
+            <td>Active crisis. Urgency is real. Switching timeline: days.</td>
+          </tr>
+          <tr>
+            <td><strong>Solution searching</strong></td>
+            <td>
+              <span class="mono-text">"cross-border payment solution"</span>&nbsp;
+              <span class="mono-text">"better FX rates"</span>&nbsp;
+              <span class="mono-text">"anyone recommend"</span>
+            </td>
+            <td class="intent-high">High</td>
+            <td>Publicly asking for recommendations. Warm to any credible reply.</td>
+          </tr>
+          <tr>
+            <td><strong>Corridor-specific pain</strong></td>
+            <td>
+              <span class="mono-text">"Canada Nigeria transfer"</span>&nbsp;
+              <span class="mono-text">"UK India payment"</span>&nbsp;
+              <span class="mono-text">"USD GBP business"</span>
+            </td>
+            <td class="intent-med">High</td>
+            <td>Shows specific route. Easy to personalise outreach exactly.</td>
+          </tr>
+          <tr>
+            <td><strong>Compliance &amp; KYC friction</strong></td>
+            <td>
+              <span class="mono-text">"KYC failed"</span>&nbsp;
+              <span class="mono-text">"account suspended"</span>&nbsp;
+              <span class="mono-text">"compliance hold"</span>
+            </td>
+            <td class="intent-med">Medium-high</td>
+            <td>Platform trust is broken. Ready to explore alternatives.</td>
+          </tr>
+          <tr>
+            <td><strong>Fee frustration</strong></td>
+            <td>
+              <span class="mono-text">"FX fees too high"</span>&nbsp;
+              <span class="mono-text">"transfer costs killing"</span>&nbsp;
+              <span class="mono-text">"hidden charges"</span>
+            </td>
+            <td class="intent-med">Medium</td>
+            <td>Not in crisis yet, but evaluating. Good for watchlist monitoring.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <p>
+        <strong>Pro tip:</strong> The most powerful signals combine two categories at once — for example, a competitor name + a specific corridor + the word "urgent" or "desperate." That composite signal almost always scores 8+ out of 10 in intent.
+      </p>
+    </div>
+
+    <h2>The three-layer system that separates signal from noise</h2>
+
+    <p>
+      Here's the problem with raw keyword monitoring: if you just set up a Twitter search for "payment failed," you'll drown in consumer complaints, crypto traders, and people complaining about Netflix. That's noise. And noise destroys the whole system because your sales team stops trusting the alerts.
+    </p>
+
+    <p>The solution is a <strong>three-layer filtering architecture:</strong></p>
+
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>The keyword pre-filter — eliminate 70% of noise instantly</h3>
+        <p>
+          Before anything else, filter out posts that contain consumer signals. Block keywords like "personal account," "my salary," "pocket money," "send to family," "student fees." These are almost never B2B buyers. This single filter eliminates the majority of irrelevant posts before any processing happens.
+        </p>
+        <p>
+          At the same time, boost posts that contain business signals: "supplier payment," "business account," "invoice," "client transfer," "B2B," or company-sounding usernames (Ltd, Inc, Corp, Co). These weight the signal heavily toward commercial intent.
+        </p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>The logic filter — apply your ICP criteria</h3>
+        <p>
+          After the keyword filter, apply your Ideal Customer Profile criteria. This means checking: Is this poster in a geography you serve? Are they a business account or personal? Do they mention amounts above a threshold (e.g., "$5k+" signals commercial volume)? Is the corridor one you operate in?
+        </p>
+        <p>
+          This layer runs in pure logic — no AI cost, near-zero processing time. It cuts another 20% of remaining posts before any AI ever touches them.
+        </p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>The intelligence layer — AI scores and writes the outreach</h3>
+        <p>
+          Now the surviving 10% of posts — the ones that passed both filters — go to an AI scoring layer. The AI reads the full post in context, scores buying intent from 0–10, identifies the buyer's corridor and urgency level, and writes a personalised outreach message your team can send immediately.
+        </p>
+        <p>
+          Critically, the AI also flags a <strong>watchlist</strong> — posts that score 3–4 today but show early-stage research behaviour. These get silently monitored and escalated automatically if the same person posts again with higher urgency.
+        </p>
+      </div>
+    </div>
+
+    <h2>How to action signals before your competitors do</h2>
+
+    <p>
+      Finding the signal is only half the equation. <strong>Speed of response is the variable that determines whether you win the deal.</strong>
+    </p>
+
+    <p>
+      The average B2B sales team responds to buyer signals in 42–47 hours. By then, the buyer has already spoken to two competitors, possibly made a decision, and definitely lost the urgency they had when they posted. Your window — from the moment a high-intent tweet is posted — is measured in <strong>minutes to hours, not days.</strong>
+    </p>
+
+    <h3>The signal card format that converts</h3>
+
+    <p>
+      When you action a Twitter signal, your outreach needs to do three things: show you saw their specific situation, demonstrate you solve it exactly, and create a frictionless next step. Here's the structure:
+    </p>
+
+    <ol>
+      <li><strong>Reference the signal directly</strong> — "Saw your tweet about the blocked CA→NG transfer." Don't pretend you just happened to message them.</li>
+      <li><strong>Lead with your most relevant proof</strong> — volume moved in their corridor, specific companies you've helped, a compliance credential they'll recognise.</li>
+      <li><strong>Single CTA with zero friction</strong> — "DM me" or "Here's a 10-minute call link." Never a form. Never a brochure.</li>
+    </ol>
+
+    <div class="callout">
+      <p>
+        <strong>Signal-referenced outreach converts because it's relevant from the first word.</strong> The buyer knows you're not cold-emailing a list. You saw their specific problem, you have a specific solution, and you reached out within minutes. That combination is almost impossible to ignore.
+      </p>
+    </div>
+
+    <h3>Routing signals by score tier</h3>
+
+    <p>
+      Not every signal should get the same treatment. A 9/10 intent score and a 4/10 intent score are different animals — and routing them the same way wastes your team's attention on the wrong things.
+    </p>
+
+    <ul>
+      <li><strong>Score 8–10 (Immediate):</strong> Instant Slack alert to the relevant sales rep. This is an active buyer in crisis right now. Respond within 15 minutes or you've lost the window.</li>
+      <li><strong>Score 5–7 (Digest):</strong> Collected throughout the day, delivered as a prioritised morning brief. These buyers are researching — they have time, but not unlimited time.</li>
+      <li><strong>Score 3–4 (Watchlist):</strong> Monitored silently. If the same person tweets again with higher urgency in the next 30–60 days, the signal auto-escalates. You don't miss the moment when they hit crisis.</li>
+      <li><strong>Score 0–2 (Discard):</strong> Never shown to your team. Consumer intent, wrong geography, personal payments. Zero noise.</li>
+    </ul>
+
+    <h2>What this looks like in practice: a real signal to close sequence</h2>
+
+    <p>Here's a real scenario of exactly how this plays out when the system is running correctly.</p>
+
+    <p>
+      <strong>14:31 UTC.</strong> A founder in Toronto tweets: <em>"Bank blocked my $45k CAD Lagos supplier payment again. Third time this month. Anyone know a better cross-border solution?"</em>
+    </p>
+    <p>
+      <strong>14:32 UTC.</strong> Flintel's listener picks up the post. It passes the keyword filter (mentions supplier payment, specific amount, cross-border), passes the ICP filter (CA→NG corridor, B2B amount), and routes to the AI scoring layer.
+    </p>
+    <p>
+      <strong>14:33 UTC.</strong> The AI scores it 9/10. It writes an outreach script referencing the specific corridor and the bank block. A complete signal card lands in your team's Slack channel.
+    </p>
+    <p>
+      <strong>14:35 UTC.</strong> Your sales rep replies to the tweet using the ready-made outreach script. They're the first vendor to engage.
+    </p>
+    <p>
+      <strong>Two days later.</strong> The founder is a client.
+    </p>
+
+    <p>
+      That's not a hypothetical. That's the sequence that plays out every day in the corridors fintech companies serve — and the teams with real-time signal intelligence are the ones winning those deals.
+    </p>
+
+    <h2>Building this system yourself vs. using dedicated signal intelligence</h2>
+
+    <p>
+      You can build a version of this manually. Set up Twitter Advanced Search saved searches for your key terms. Check them twice a day. Route interesting posts to a shared Slack channel. Write the outreach yourself.
+    </p>
+
+    <p>The problems are predictable:</p>
+
+    <ul>
+      <li>Twice-a-day checking means you're 4–12 hours behind. The buyer has already moved on.</li>
+      <li>Manual filtering means your team burns attention on noise. They stop trusting the process.</li>
+      <li>Writing outreach from scratch for every signal is slow. Speed matters more than perfection here.</li>
+      <li>You're not monitoring Reddit, Telegram, and competitor reviews at the same time. You're missing the full picture.</li>
+    </ul>
+
+    <p>
+      The alternative is a purpose-built signal intelligence layer that handles the monitoring, filtering, scoring, and outreach writing — so your sales team sees only the signals that matter, with everything they need to act immediately already written for them.
+    </p>
+
+    <h2>The three searches to run on Twitter right now</h2>
+
+    <p>If you want to test this concept before building anything, run these three searches on Twitter Advanced Search today:</p>
+
+    <ol>
+      <li><span class="mono-text">"cross-border payment" OR "international transfer" "failed" OR "blocked" OR "delayed" -personal -gift -birthday</span></li>
+      <li><span class="mono-text">"Wise" OR "Airwallex" OR "WorldFirst" "alternative" OR "better option" OR "recommend" min_faves:2</span></li>
+      <li><span class="mono-text">"supplier payment" OR "invoice payment" "problem" OR "issue" OR "urgent" filter:verified OR has:links</span></li>
+    </ol>
+
+    <p>
+      Run those searches right now. Count the number of results from the last 48 hours. Every single one of those posts is a potential buyer your competitors don't know about yet.
+    </p>
+
+    <p>
+      Now imagine checking those searches not twice a day, but <strong>every 60 seconds, across every corridor you serve, with AI scoring every result and routing only the 8–10s to your team in real time.</strong>
+    </p>
+
+    <p>That's the difference between intent monitoring and signal intelligence.</p>
+
+    <!-- CTA -->
+    <div class="cta-block">
+      <h2>See a live signal from your market</h2>
+      <p>We'll show you real buyers posting publicly in your exact corridor — right now, this week. No pitch deck. No commitment. Just live signals.</p>
+      <a class="cta-btn" href="https://calendly.com/hello-flintel/new-meeting">Book a 15-minute call →</a>
+    </div>
+
+    <h2>Summary: the fintech buyer signal playbook</h2>
+
+    <ul>
+      <li><strong>Twitter is your highest-urgency channel</strong> — buyers post real-time frustration that expires in hours, not days.</li>
+      <li><strong>Monitor competitor frustration, payment failures, and solution-searching language</strong> — these three categories produce the highest-intent signals.</li>
+      <li><strong>Use a three-layer filter</strong> — keyword pre-filter, ICP logic filter, then AI scoring — to eliminate noise before it reaches your team.</li>
+      <li><strong>Route by score tier</strong> — 8–10 gets an instant Slack alert, 5–7 goes in the daily digest, 3–4 enters the watchlist, 0–2 gets discarded.</li>
+      <li><strong>Speed wins the deal</strong> — the first vendor to engage wins ~80% of deals. Your window is minutes, not hours.</li>
+      <li><strong>Reference the signal in your outreach</strong> — signal-referenced messages convert because they're specific from the first word.</li>
+    </ul>
+
+    <p>
+      Your buyers are already talking. The question is whether you're listening — and whether you're listening fast enough.
+    </p>
+
+  </article>
+
+  <footer>
+    <p>© 2025 Flintel · <a href="/">getflintel.com</a> · <a href="mailto:hello@flintel.io">hello@flintel.io</a></p>
+  </footer>
+
+</body>
+</html>
