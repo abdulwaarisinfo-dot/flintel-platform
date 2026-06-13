@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="main, follow">
-<title>Flintel — Signal Intelligence for Fintech & FX</title>
+<meta name="robots" content="index, follow">
+<title>Flintel — Signal Intelligence for Fintech &amp; FX</title>
 <meta name="description" content="Flintel monitors Twitter, Reddit and Telegram 24/7. The moment a fintech buyer shows intent, your team gets the signal and the outreach script — in 90 seconds.">
 <link rel="canonical" href="https://getflintel.com/">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://getflintel.com/">
-<meta property="og:title" content="Flintel — Signal Intelligence for Fintech & FX">
+<meta property="og:title" content="Flintel — Signal Intelligence for Fintech &amp; FX">
 <meta property="og:description" content="Your buyers are already talking. We find them first. Real-time intent signals delivered to Slack and HubSpot in under 90 seconds.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Flintel — Signal Intelligence for Fintech">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Flintel","description":"Signal intelligence platform that monitors social communities for buyer intent and delivers actionable leads to fintech sales teams.","url":"https://flintel.io","applicationCategory":"BusinessApplication","offers":{"@type":"Offer","availability":"https://schema.org/InStock"},"contactPoint":{"@type":"ContactPoint","email":"hello.flintel@gmail.com","contactType":"sales"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Flintel","description":"Signal intelligence platform that monitors social communities for buyer intent and delivers actionable leads to fintech sales teams.","url":"https://getflintel.com","applicationCategory":"BusinessApplication","offers":{"@type":"Offer","availability":"https://schema.org/InStock"},"contactPoint":{"@type":"ContactPoint","email":"hello@flintel.io","contactType":"sales"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,200;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -56,7 +56,7 @@ a{color:inherit;text-decoration:none}
    NAV
 ═══════════════════════════════════════════ */
 #nav {
-  position: fixed; top:0; left:0; right:0; --z-main:999;
+  position: fixed; top:0; left:0; right:0; z-index:999;
   height: 52px;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 40px;
@@ -88,7 +88,7 @@ a{color:inherit;text-decoration:none}
 .nav-btn:hover { background: var(--ink-2); transform: scale(1.03); }
 
 /* ═══════════════════════════════════════════
-   HERO — FULL VIEWPORT TYPE
+   HERO
 ═══════════════════════════════════════════ */
 #hero {
   min-height: 100svh;
@@ -98,9 +98,9 @@ a{color:inherit;text-decoration:none}
   padding: 100px 32px 80px;
   position: relative; overflow: hidden;
   background: var(--white);
+  isolation: isolate;
 }
 
-/* Delicate grid lines — pure texture */
 #hero::before {
   content:'';
   position:absolute; inset:0;
@@ -112,9 +112,19 @@ a{color:inherit;text-decoration:none}
   -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%);
   opacity: 0.35;
   pointer-events: none;
+  animation: gridDrift 40s linear infinite;
 }
 
-.hero-content { position:relative; --z-main:1; }
+.hero-glow {
+  position: absolute; inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(420px circle at var(--mx,50%) var(--my,30%), rgba(0,102,204,0.07), transparent 70%);
+  transition: opacity 0.3s; opacity: 0;
+}
+#hero.glow-active .hero-glow { opacity: 1; }
+
+.hero-content { position:relative; z-index:1; }
 
 .hero-tag {
   display: inline-flex; align-items: center; gap: 8px;
@@ -129,7 +139,10 @@ a{color:inherit;text-decoration:none}
   background: var(--green);
   box-shadow: 0 0 0 0 rgba(40,205,65,0.4);
   animation: pipPulse 2s ease infinite;
+  transition: transform 0.3s var(--ease);
 }
+.hero-tag:hover .pip { transform: scale(1.4); }
+
 @keyframes pipPulse {
   0%   { box-shadow: 0 0 0 0   rgba(40,205,65,0.5); }
   70%  { box-shadow: 0 0 0 9px rgba(40,205,65,0);   }
@@ -168,6 +181,10 @@ a{color:inherit;text-decoration:none}
 @keyframes fadeUp {
   to { opacity:1; transform:translateY(0); }
 }
+@keyframes gridDrift {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 80px 80px, 80px 80px; }
+}
 
 .hero-sub {
   font-size: clamp(15px, 1.6vw, 18px);
@@ -191,22 +208,33 @@ a{color:inherit;text-decoration:none}
   padding: 14px 28px; border-radius: 980px;
   transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
   letter-spacing: -0.01em;
+  position: relative; overflow: hidden; will-change: transform;
 }
 .cta-main:hover {
   background: var(--ink-2);
   transform: translateY(-1px);
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
 }
+.cta-main::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, transparent 60%);
+  opacity:0; transform: scale(0.4);
+  transition: opacity 0.5s, transform 0.6s; pointer-events:none;
+}
+.cta-main:active::before { opacity:1; transform: scale(1.6); transition: 0s; }
+.cta-main svg { transition: transform 0.35s var(--ease); }
+.cta-main:hover svg { transform: translateX(4px); }
+
 .cta-ghost {
   display: inline-flex; align-items: center; gap: 7px;
   font-size: 15px; font-weight: 400;
   color: var(--ink-3);
   padding: 14px 24px; border-radius: 980px;
   border: 1px solid var(--ink-5);
-  transition: border-color 0.2s, color 0.2s, transform 0.2s;
-  letter-spacing: -0.01em;
+  transition: border-color 0.2s, color 0.2s, transform 0.3s var(--ease), gap 0.3s;
+  letter-spacing: -0.01em; will-change: transform;
 }
-.cta-ghost:hover { border-color: var(--ink-3); color: var(--ink); transform: translateY(-1px); }
+.cta-ghost:hover { border-color: var(--ink-3); color: var(--ink); transform: translateY(-1px); gap: 12px; }
 
 .hero-proof {
   margin-top: 48px;
@@ -214,7 +242,6 @@ a{color:inherit;text-decoration:none}
   opacity: 0; animation: fadeUp 0.8s var(--ease) 1.1s forwards;
 }
 
-/* Scroll cue */
 .scroll-cue {
   position: absolute; bottom: 32px; left: 50%;
   transform: translateX(-50%);
@@ -236,13 +263,10 @@ a{color:inherit;text-decoration:none}
    SIGNAL DEMO
 ═══════════════════════════════════════════ */
 #demo {
-  padding: 140px 32px 160px;
-  background: var(--off);
   border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
 }
 
-.demo-inner { max-width: 860px; margin: 0 auto; }
+.demo-inner { padding: 140px 32px; max-width: 900px; margin: 0 auto; }
 
 .demo-label {
   font-family: var(--mono); font-size: 11px;
@@ -262,6 +286,11 @@ a{color:inherit;text-decoration:none}
   box-shadow:
     0 1px 2px rgba(0,0,0,0.03),
     0 12px 40px rgba(0,0,0,0.05);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  transform-style: preserve-3d; will-change: transform;
+}
+.live-card:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05), 0 16px 48px rgba(0,0,0,0.09), 0 48px 100px rgba(0,0,0,0.08);
 }
 
 .lc-bar {
@@ -341,7 +370,9 @@ a{color:inherit;text-decoration:none}
   font-size: 11px; font-weight: 400; color: var(--ink-4);
   background: transparent; border: 1px solid var(--line);
   padding: 4px 11px; border-radius: 980px;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.2s, color 0.2s;
 }
+.lc-tag:hover { transform: translateY(-2px); background: var(--ink); color: var(--white); border-color: var(--ink); }
 
 .score-section { display: flex; flex-direction: column; gap: 12px; }
 .score-top { display: flex; align-items: baseline; gap: 4px; }
@@ -378,7 +409,9 @@ a{color:inherit;text-decoration:none}
   border-radius: 14px;
   padding: 18px 20px;
   display: flex; flex-direction: column; gap: 8px;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
+.outreach-box:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(40,205,65,0.12); }
 .outreach-lbl {
   font-size: 10px; font-weight: 500;
   color: var(--ink-4); text-transform: uppercase; letter-spacing: 0.12em;
@@ -392,7 +425,9 @@ a{color:inherit;text-decoration:none}
   padding: 4px 11px; border-radius: 980px;
   color: var(--ink-3); background: transparent;
   border: 1px solid var(--line);
+  transition: transform 0.25s var(--ease), border-color 0.25s, color 0.25s;
 }
+.dest-chip:hover { transform: translateY(-2px); border-color: var(--ink-3); color: var(--ink); }
 
 .lc-timestamp {
   font-family: var(--mono); font-size: 10px;
@@ -408,8 +443,14 @@ a{color:inherit;text-decoration:none}
   width: 6px; height: 6px; border-radius: 50%;
   background: var(--ink-5); border: none; cursor: pointer;
   padding: 0; transition: all 0.2s; flex-shrink: 0;
+  position: relative;
 }
 .signal-dot-btn.active { background: var(--ink); transform: scale(1.4); }
+.signal-dot-btn::after {
+  content:''; position:absolute; inset:-6px; border-radius:50%;
+  border: 1px solid transparent; transition: border-color 0.25s, transform 0.25s; transform: scale(0.6);
+}
+.signal-dot-btn:hover::after, .signal-dot-btn.active::after { border-color: var(--ink-5); transform: scale(1); }
 
 /* ═══════════════════════════════════════════
    STATEMENT SECTIONS
@@ -450,8 +491,14 @@ a{color:inherit;text-decoration:none}
 }
 .statement.dark .statement-p { color: rgba(255,255,255,0.5); }
 
+.statement-h .w {
+  display: inline-block; opacity: 0; transform: translateY(0.4em) rotate(2deg); filter: blur(4px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease), filter 0.7s var(--ease);
+}
+.statement.r.in .statement-h .w { opacity:1; transform:translateY(0) rotate(0); filter: blur(0); }
+
 /* ═══════════════════════════════════════════
-   BLOG TEASER SECTION
+   BLOG TEASER
 ═══════════════════════════════════════════ */
 #blog-teaser {
   padding: 120px 32px;
@@ -465,8 +512,6 @@ a{color:inherit;text-decoration:none}
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 80px; align-items: center;
 }
-
-.blog-teaser-left {}
 
 .blog-teaser-eyebrow {
   font-family: var(--mono); font-size: 11px;
@@ -497,7 +542,6 @@ a{color:inherit;text-decoration:none}
 }
 .blog-teaser-link:hover { border-color: var(--ink); gap: 12px; }
 
-/* Post card on the right */
 .blog-teaser-card {
   background: var(--white);
   border: 1px solid var(--line);
@@ -542,7 +586,6 @@ a{color:inherit;text-decoration:none}
 
 .btc-divider { height: 1px; background: var(--line); margin: 0 -24px 20px; }
 
-/* Mini signal preview inside card */
 .btc-signal {
   background: var(--off); border-radius: 12px; padding: 14px;
   display: flex; flex-direction: column; gap: 8px;
@@ -593,27 +636,6 @@ a{color:inherit;text-decoration:none}
   border-bottom: 1px solid var(--line);
   background: var(--white);
 }
-.stats-row {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  max-width: 1080px; margin: 0 auto;
-}
-.stat-cell {
-  padding: 100px 56px;
-  border-right: 1px solid var(--line);
-  display: flex; flex-direction: column; gap: 14px;
-}
-.stat-cell:last-child { border-right: none; }
-.stat-n {
-  font-family: var(--serif);
-  font-size: clamp(72px, 9vw, 112px);
-  font-weight: 300; font-style: italic;
-  letter-spacing: -0.05em; line-height: 1;
-  color: var(--ink);
-}
-.stat-d {
-  font-size: 15px; font-weight: 300;
-  line-height: 1.55; color: var(--ink-3); max-width: 200px;
-}
 
 /* ═══════════════════════════════════════════
    CTA
@@ -641,7 +663,7 @@ a{color:inherit;text-decoration:none}
   -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%);
   pointer-events: none;
 }
-.cta-inner { position: relative; --z-main: 1; display: flex; flex-direction: column; align-items: center; }
+.cta-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
 .cta-eyebrow {
   font-family: var(--mono); font-size: 11px;
   letter-spacing: 0.12em; text-transform: uppercase;
@@ -669,9 +691,31 @@ a{color:inherit;text-decoration:none}
   padding: 16px 32px; border-radius: 980px;
   transition: transform 0.2s, box-shadow 0.2s;
   letter-spacing: -0.01em;
+  position: relative; overflow: hidden; will-change: transform;
 }
 .cta-btn:hover { transform: scale(1.04) translateY(-1px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+.cta-btn::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, transparent 60%);
+  opacity:0; transform: scale(0.4);
+  transition: opacity 0.5s, transform 0.6s; pointer-events:none;
+}
+.cta-btn:active::before { opacity:1; transform: scale(1.6); transition: 0s; }
+.cta-btn svg { transition: transform 0.35s var(--ease); }
+.cta-btn:hover svg { transform: translateX(4px); }
 .cta-fine { margin-top: 24px; font-size: 12px; color: rgba(255,255,255,0.2); letter-spacing: 0.02em; }
+
+.particle {
+  position:absolute; border-radius:50%;
+  background: rgba(255,255,255,0.5); pointer-events:none;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) translateX(0); opacity:0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-420px) translateX(var(--dx,20px)); opacity:0; }
+}
 
 /* ═══════════════════════════════════════════
    FOOTER
@@ -685,8 +729,8 @@ footer {
 .footer-logo { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--ink); letter-spacing: -0.025em; }
 .footer-center { font-size: 12px; color: var(--ink-5); text-align: center; }
 .footer-r { display: flex; justify-content: flex-end; }
-.footer-email { font-size: 13px; color: var(--ink-4); transition: color 0.15s; }
-.footer-email:hover { color: var(--blue); }
+.footer-email { font-size: 13px; color: var(--ink-4); transition: color 0.15s, padding-right 0.25s var(--ease); }
+.footer-email:hover { color: var(--blue); padding-right: 4px; }
 
 /* ═══════════════════════════════════════════
    SCROLL REVEAL
@@ -700,17 +744,15 @@ footer {
 .r.d3 { transition-delay: 0.3s; }
 .r.in { opacity: 1; transform: none; }
 
+.live-card.r { transform: translateY(40px) scale(0.985); }
+.live-card.r.in { transform: none; }
+
 /* ═══════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════ */
 @media (max-width: 960px) {
   .lc-body { grid-template-columns: 1fr; }
   .lc-left { border-right: none; border-bottom: 1px solid var(--line); }
-  .stats-row { grid-template-columns: 1fr; }
-  .stat-cell { border-right: none; border-bottom: 1px solid var(--line); padding: 64px 40px; }
-  .stat-cell:last-child { border-bottom: none; }
-  .who-cols { grid-template-columns: 1fr; gap: 56px; }
-  .tiers-inner { grid-template-columns: 1fr; gap: 56px; }
   .blog-teaser-inner { grid-template-columns: 1fr; gap: 40px; }
   footer { grid-template-columns: 1fr; gap: 12px; text-align: center; }
   .footer-r { justify-content: center; }
@@ -738,125 +780,15 @@ footer {
 .nav-logo { transition: letter-spacing 0.4s var(--ease), opacity 0.3s; }
 .nav-logo:hover { letter-spacing: 0.01em; opacity: 0.7; }
 
-#hero { isolation: isolate; }
-.hero-glow {
-  position: absolute; inset: 0;
-  --z-main: 0; 
-  pointer-events: none;
-  background: radial-gradient(420px circle at var(--mx,50%) var(--my,30%), rgba(0,102,204,0.07), transparent 70%);
-  transition: opacity 0.3s; opacity: 0;
-}
-#hero.glow-active .hero-glow { opacity: 1; }
-
-#hero::before { animation: gridDrift 40s linear infinite; }
-@keyframes gridDrift {
-  0% { background-position: 0 0, 0 0; }
-  100% { background-position: 80px 80px, 80px 80px; }
-}
-
-.hero-tag:hover .pip { transform: scale(1.4); }
-.pip { transition: transform 0.3s var(--ease); }
-
-.cta-main, .cta-ghost, .cta-btn, .nav-btn { position: relative; overflow: hidden; will-change: transform; }
-.cta-main::before, .cta-btn::before {
-  content:''; position:absolute; inset:0;
-  background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, transparent 60%);
-  opacity:0; transform: scale(0.4);
-  transition: opacity 0.5s, transform 0.6s; pointer-events:none;
-}
-.cta-main:active::before, .cta-btn:active::before { opacity:1; transform: scale(1.6); transition: 0s; }
-.cta-main svg, .cta-btn svg { transition: transform 0.35s var(--ease); }
-.cta-main:hover svg, .cta-btn:hover svg { transform: translateX(4px); }
-.cta-ghost { transition: border-color 0.2s, color 0.2s, transform 0.3s var(--ease), gap 0.3s; }
-.cta-ghost:hover { gap: 12px; }
-
-.live-card {
-  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
-  transform-style: preserve-3d; will-change: transform;
-}
-.live-card:hover {
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05), 0 16px 48px rgba(0,0,0,0.09), 0 48px 100px rgba(0,0,0,0.08);
-}
-
-.lc-tag, .dest-chip { transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.2s, color 0.2s; }
-.lc-tag:hover { transform: translateY(-2px); background: var(--ink); color: var(--white); border-color: var(--ink); }
-.dest-chip:hover { transform: translateY(-2px); border-color: var(--ink-3); color: var(--ink); }
-.outreach-box { transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
-.outreach-box:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(40,205,65,0.12); }
-
-.signal-dot-btn { position: relative; }
-.signal-dot-btn::after {
-  content:''; position:absolute; inset:-6px; border-radius:50%;
-  border: 1px solid transparent; transition: border-color 0.25s, transform 0.25s; transform: scale(0.6);
-}
-.signal-dot-btn:hover::after, .signal-dot-btn.active::after { border-color: var(--ink-5); transform: scale(1); }
-
-.statement-h .w {
-  display: inline-block; opacity: 0; transform: translateY(0.4em) rotate(2deg); filter: blur(4px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease), filter 0.7s var(--ease);
-}
-.statement.r.in .statement-h .w { opacity:1; transform:translateY(0) rotate(0); filter: blur(0); }
-
-#how article { transition: transform 0.4s var(--ease); }
-#how article:hover { transform: translateY(-6px); }
-#how article > div:first-child { transition: background 0.3s, color 0.3s, transform 0.4s var(--ease), border-color 0.3s; }
-#how article:hover > div:first-child { background: var(--ink); color: var(--white); border-color: var(--ink); transform: rotate(360deg); }
-
-#stats > div > div { transition: background 0.4s var(--ease); }
-#stats > div > div:hover { background: var(--off); }
-#stats [aria-label] { display: inline-block; transition: transform 0.4s var(--ease), color 0.4s var(--ease); }
-#stats > div > div:hover [aria-label] { transform: scale(1.05); color: var(--blue); }
-
-#sources article { transition: background 0.35s, padding-left 0.35s var(--ease), transform 0.35s var(--ease); }
-#sources article:hover { background: var(--white); padding-left: 12px; }
-#sources article > span:first-child { display:inline-block; transition: transform 0.5s var(--ease), color 0.3s; }
-#sources article:hover > span:first-child { transform: rotate(15deg) scale(1.15); color: var(--ink); }
-#sources article > span:last-child { transition: transform 0.3s var(--ease); }
-#sources article:hover > span:last-child { transform: translateX(4px); }
-
-#who article { transition: transform 0.4s var(--ease); }
-#who article:hover { transform: translateY(-8px); }
-#who article > div:last-child { transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s; }
-#who article:hover > div:last-child { box-shadow: 0 16px 40px rgba(0,0,0,0.07); border-color: var(--ink-5); }
-
-#tiers article { position: relative; transition: background 0.3s, transform 0.3s var(--ease); }
-#tiers article::before {
-  content:''; position:absolute; left:0; top:8px; bottom:8px; width:3px;
-  border-radius:2px; background:var(--ink); transform: scaleY(0);
-  transition: transform 0.3s var(--ease); transform-origin: center;
-}
-#tiers article:hover { transform: translateX(4px); }
-#tiers article:hover::before { transform: scaleY(1); }
-#tiers article > span:first-child { transition: color 0.3s, transform 0.3s var(--ease); }
-#tiers article:hover > span:first-child { color: var(--ink); transform: translateX(2px); }
-
 .tc-orange { animation: chipGlow 3s ease-in-out infinite; }
 @keyframes chipGlow {
   0%,100% { box-shadow: 0 0 0 0 rgba(255,107,43,0); }
   50% { box-shadow: 0 0 0 4px rgba(255,107,43,0.08); }
 }
 
-#cta .particle {
-  position:absolute; border-radius:50%;
-  background: rgba(255,255,255,0.5); pointer-events:none;
-  animation: floatUp linear infinite;
-}
-@keyframes floatUp {
-  0% { transform: translateY(0) translateX(0); opacity:0; }
-  10% { opacity: 0.6; }
-  90% { opacity: 0.6; }
-  100% { transform: translateY(-420px) translateX(var(--dx,20px)); opacity:0; }
-}
-
-.footer-email { transition: color 0.2s, padding-right 0.25s var(--ease); }
-.footer-email:hover { padding-right: 4px; }
-
-.live-card.r { transform: translateY(40px) scale(0.985); }
-.live-card.r.in { transform: none; }
-
 #scroll-progress {
   position: fixed; top: 0; left: 0; height: 2px;
-  background: var(--ink); --z-main: 1000;
+  background: var(--ink); z-index: 1000;
   width: 0%; transition: width 0.1s linear;
 }
 
@@ -871,12 +803,6 @@ footer {
   .statement-h .w { opacity:1 !important; transform:none !important; filter:none !important; }
   #cta .particle { display: none !important; }
   .tc-orange { animation: none !important; }
-  #how article:hover > div:first-child,
-  #how article:hover,
-  #stats > div > div:hover [aria-label],
-  #sources article:hover > span:first-child,
-  #who article:hover,
-  #tiers article:hover { transform: none !important; }
 }
 </style>
 </head>
@@ -884,9 +810,8 @@ footer {
 
 <div id="scroll-progress" aria-hidden="true"></div>
 
-<a href="#main" style="position:absolute;top:-100%;left:16px;background:var(--blue);color:#fff;padding:8px 16px;border-radius:4px;font-size:14px;--z-main:9999;transition:top .2s" onfocus="this.style.top='16px'" onblur="this.style.top='-100%'">Skip to content</a>
+<a href="#main" style="position:absolute;top:-100%;left:16px;background:var(--blue);color:#fff;padding:8px 16px;border-radius:4px;font-size:14px;z-index:9999;transition:top .2s" onfocus="this.style.top='16px'" onblur="this.style.top='-100%'">Skip to content</a>
 
-<!-- NAV -->
 <header>
   <nav id="nav" aria-label="Main navigation">
     <a href="/" class="nav-logo" aria-label="Flintel home">Flintel</a>
@@ -949,8 +874,8 @@ footer {
 </div>
 
 <!-- ══ DEMO CARD ══ -->
-<section id="demo" aria-labelledby="demo-h" style="border-top:1px solid var(--line);">
-<div class="demo-inner" style="padding: 140px 32px; max-width: 900px; margin: 0 auto;">
+<section id="demo" aria-labelledby="demo-h">
+<div class="demo-inner">
   <div class="demo-label" id="demo-h">Live signal · updating in real time</div>
 
   <div class="live-card r">
@@ -1025,22 +950,22 @@ footer {
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;" class="r d1">
       <div style="content:'';position:absolute;top:20px;left:calc(100%/6);width:calc(100% - 100%/3);height:1px;background:var(--line);"></div>
-      <article style="display:flex;flex-direction:column;gap:20px;padding-right:56px;">
-        <div style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);position:relative;--z-main:1;flex-shrink:0;">01</div>
+      <article style="display:flex;flex-direction:column;gap:20px;padding-right:56px;transition:transform 0.4s var(--ease);" onmouseenter="this.style.transform='translateY(-6px)'" onmouseleave="this.style.transform=''">
+        <div style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);position:relative;z-index:1;flex-shrink:0;transition:background 0.3s,color 0.3s,transform 0.4s var(--ease),border-color 0.3s;">01</div>
         <div style="display:flex;flex-direction:column;gap:10px;">
           <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">The Listener</h3>
           <p style="font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-3);">Monitors Twitter, Reddit, Telegram and competitor reviews continuously. Searches your exact buyer keywords across millions of posts every 60 seconds. Never sleeps. Never misses.</p>
         </div>
       </article>
-      <article style="display:flex;flex-direction:column;gap:20px;padding-right:56px;">
-        <div style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);position:relative;--z-main:1;flex-shrink:0;">02</div>
+      <article style="display:flex;flex-direction:column;gap:20px;padding-right:56px;transition:transform 0.4s var(--ease);" onmouseenter="this.style.transform='translateY(-6px)'" onmouseleave="this.style.transform=''">
+        <div style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);position:relative;z-index:1;flex-shrink:0;transition:background 0.3s,color 0.3s,transform 0.4s var(--ease),border-color 0.3s;">02</div>
         <div style="display:flex;flex-direction:column;gap:10px;">
           <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">The Filter</h3>
           <p style="font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-3);">A two-layer system removes 95% of irrelevant content before AI ever processes it. Consumer subscriptions, wrong geography, personal payments — all eliminated instantly at zero cost.</p>
         </div>
       </article>
-      <article style="display:flex;flex-direction:column;gap:20px;">
-        <div style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);position:relative;--z-main:1;flex-shrink:0;">03</div>
+      <article style="display:flex;flex-direction:column;gap:20px;transition:transform 0.4s var(--ease);" onmouseenter="this.style.transform='translateY(-6px)'" onmouseleave="this.style.transform=''">
+        <div style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);position:relative;z-index:1;flex-shrink:0;transition:background 0.3s,color 0.3s,transform 0.4s var(--ease),border-color 0.3s;">03</div>
         <div style="display:flex;flex-direction:column;gap:10px;">
           <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">The Intelligence</h3>
           <p style="font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-3);">AI reads each post, scores buying intent 0–10, identifies the buyer, writes the exact outreach message, and delivers a complete signal card to Slack and HubSpot in under 90 seconds.</p>
@@ -1061,16 +986,16 @@ footer {
 <section id="stats" aria-label="Key metrics" style="border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--white);">
   <h2 class="sr-only">Key metrics</h2>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);max-width:1080px;margin:0 auto;">
-    <div style="padding:100px 56px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:14px;" class="r">
-      <div style="font-family:var(--serif);font-size:clamp(72px,9vw,112px);font-weight:300;font-style:italic;letter-spacing:-0.05em;line-height:1;color:var(--ink);" aria-label="90 seconds">90s</div>
+    <div style="padding:100px 56px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:14px;transition:background 0.4s var(--ease);" class="r" onmouseenter="this.style.background='var(--off)'" onmouseleave="this.style.background=''">
+      <div style="font-family:var(--serif);font-size:clamp(72px,9vw,112px);font-weight:300;font-style:italic;letter-spacing:-0.05em;line-height:1;color:var(--ink);transition:transform 0.4s var(--ease),color 0.4s var(--ease);" aria-label="90 seconds">90s</div>
       <p style="font-size:15px;font-weight:300;line-height:1.55;color:var(--ink-3);max-width:200px;">From public post to Slack alert. Every time. Without exception.</p>
     </div>
-    <div style="padding:100px 56px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:14px;" class="r d1">
-      <div style="font-family:var(--serif);font-size:clamp(72px,9vw,112px);font-weight:300;font-style:italic;letter-spacing:-0.05em;line-height:1;color:var(--ink);" aria-label="24 hours a day, 7 days a week">24/7</div>
+    <div style="padding:100px 56px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:14px;transition:background 0.4s var(--ease);" class="r d1" onmouseenter="this.style.background='var(--off)'" onmouseleave="this.style.background=''">
+      <div style="font-family:var(--serif);font-size:clamp(72px,9vw,112px);font-weight:300;font-style:italic;letter-spacing:-0.05em;line-height:1;color:var(--ink);transition:transform 0.4s var(--ease),color 0.4s var(--ease);" aria-label="24 hours a day, 7 days a week">24/7</div>
       <p style="font-size:15px;font-weight:300;line-height:1.55;color:var(--ink-3);max-width:200px;">Continuous monitoring across every source and every market.</p>
     </div>
-    <div style="padding:100px 56px;display:flex;flex-direction:column;gap:14px;" class="r d2">
-      <div style="font-family:var(--serif);font-size:clamp(72px,9vw,112px);font-weight:300;font-style:italic;letter-spacing:-0.05em;line-height:1;color:var(--ink);" aria-label="95 percent">95%</div>
+    <div style="padding:100px 56px;display:flex;flex-direction:column;gap:14px;transition:background 0.4s var(--ease);" class="r d2" onmouseenter="this.style.background='var(--off)'" onmouseleave="this.style.background=''">
+      <div style="font-family:var(--serif);font-size:clamp(72px,9vw,112px);font-weight:300;font-style:italic;letter-spacing:-0.05em;line-height:1;color:var(--ink);transition:transform 0.4s var(--ease),color 0.4s var(--ease);" aria-label="95 percent">95%</div>
       <p style="font-size:15px;font-weight:300;line-height:1.55;color:var(--ink-3);max-width:200px;">Noise removed before your team sees a single irrelevant alert.</p>
     </div>
   </div>
@@ -1084,25 +1009,25 @@ footer {
       <h2 style="font-family:var(--serif);font-size:clamp(36px,5vw,60px);font-weight:500;letter-spacing:-0.04em;line-height:1.08;color:var(--ink);" id="sources-h">We monitor where<br>your buyers<br><em style="font-weight:300;color:var(--ink-3);">actually talk.</em></h2>
     </div>
     <div style="display:flex;flex-direction:column;" class="r d1">
-      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);" tabmain="0">
-        <span style="font-size:24px;color:var(--ink-4);font-family:var(--mono);">𝕏</span>
+      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);transition:background 0.35s,padding-left 0.35s var(--ease),transform 0.35s var(--ease);" tabindex="0" onmouseenter="this.style.background='var(--white)';this.style.paddingLeft='12px'" onmouseleave="this.style.background='';this.style.paddingLeft=''">
+        <span style="font-size:24px;color:var(--ink-4);font-family:var(--mono);transition:transform 0.5s var(--ease),color 0.3s;">𝕏</span>
         <span style="font-size:22px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">Twitter / X</span>
         <span style="font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-3);">Founders vent publicly the moment something breaks. Real-time keyword streaming across 500 million daily users. Highest urgency, highest intent.</span>
         <span style="font-size:11px;font-weight:500;color:var(--ink-3);background:var(--white);border:1px solid var(--line);padding:5px 12px;border-radius:7px;white-space:nowrap;">Primary source</span>
       </article>
-      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);" tabmain="0">
+      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);transition:background 0.35s,padding-left 0.35s var(--ease),transform 0.35s var(--ease);" tabindex="0" onmouseenter="this.style.background='var(--white)';this.style.paddingLeft='12px'" onmouseleave="this.style.background='';this.style.paddingLeft=''">
         <span style="font-size:24px;color:var(--ink-4);font-family:var(--mono);">◈</span>
         <span style="font-size:22px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">Reddit</span>
         <span style="font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-3);">Business owners write detailed, context-rich posts in relevant communities. A complete picture of where the buyer sits in their decision journey.</span>
         <span style="font-size:11px;font-weight:500;color:var(--ink-3);background:var(--white);border:1px solid var(--line);padding:5px 12px;border-radius:7px;white-space:nowrap;">High context</span>
       </article>
-      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);" tabmain="0">
+      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);transition:background 0.35s,padding-left 0.35s var(--ease),transform 0.35s var(--ease);" tabindex="0" onmouseenter="this.style.background='var(--white)';this.style.paddingLeft='12px'" onmouseleave="this.style.background='';this.style.paddingLeft=''">
         <span style="font-size:24px;color:var(--ink-4);font-family:var(--mono);">★</span>
         <span style="font-size:22px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">Competitor Reviews</span>
         <span style="font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-3);">Someone leaving a one-star review has already decided to leave. The hottest lead in existence. Found on Trustpilot and Google within seconds of publishing.</span>
-        <span style="font-size:11px;font-weight:500;color:var(--orange);background:rgba(255,107,43,0.08);border:1px solid rgba(255,107,43,0.15);padding:5px 12px;border-radius:7px;white-space:nowrap;">Hottest signals</span>
+        <span class="tc-orange" style="font-size:11px;font-weight:500;color:var(--orange);background:rgba(255,107,43,0.08);border:1px solid rgba(255,107,43,0.15);padding:5px 12px;border-radius:7px;white-space:nowrap;">Hottest signals</span>
       </article>
-      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);" tabmain="0">
+      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);transition:background 0.35s,padding-left 0.35s var(--ease),transform 0.35s var(--ease);" tabindex="0" onmouseenter="this.style.background='var(--white)';this.style.paddingLeft='12px'" onmouseleave="this.style.background='';this.style.paddingLeft=''">
         <span style="font-size:24px;color:var(--ink-4);font-family:var(--mono);">◉</span>
         <span style="font-size:22px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">Telegram</span>
         <span style="font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-3);">Diaspora communities where buyers openly compare services and share frustrations. The intelligence layer that competitors never think to monitor.</span>
@@ -1121,11 +1046,11 @@ footer {
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:48px;" class="r d1">
 
-      <article style="display:flex;flex-direction:column;gap:24px;">
+      <article style="display:flex;flex-direction:column;gap:24px;transition:transform 0.4s var(--ease);" onmouseenter="this.style.transform='translateY(-8px)'" onmouseleave="this.style.transform=''">
         <span style="font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-4);padding-bottom:24px;border-bottom:1px solid var(--line);display:block;">FX and Remittance</span>
         <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.025em;line-height:1.2;color:var(--ink);">Cross-border payment platforms</h3>
         <p style="font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-3);flex:1;">Diaspora businesses comparing corridors, hitting bank blocks, searching for better rates — posting publicly every single day. Find them before your competitors do.</p>
-        <div style="background:var(--off);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;border:1px solid var(--line);">
+        <div style="background:var(--off);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;border:1px solid var(--line);transition:transform 0.35s var(--ease),box-shadow 0.35s var(--ease),border-color 0.35s;">
           <p style="font-size:13px;line-height:1.6;color:var(--ink-2);font-style:italic;">"Bank blocked my $45k CAD Lagos supplier payment again. Third time this month. Anyone know a better cross-border solution?"</p>
           <div style="display:flex;align-items:center;justify-content:space-between;">
             <span style="font-family:var(--mono);font-size:10px;color:var(--ink-5);letter-spacing:0.06em;text-transform:uppercase;">Real signal</span>
@@ -1134,11 +1059,11 @@ footer {
         </div>
       </article>
 
-      <article style="display:flex;flex-direction:column;gap:24px;">
+      <article style="display:flex;flex-direction:column;gap:24px;transition:transform 0.4s var(--ease);" onmouseenter="this.style.transform='translateY(-8px)'" onmouseleave="this.style.transform=''">
         <span style="font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-4);padding-bottom:24px;border-bottom:1px solid var(--line);display:block;">Crypto and Digital Assets</span>
         <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.025em;line-height:1.2;color:var(--ink);">Exchanges and payment rails</h3>
         <p style="font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-3);flex:1;">Merchants comparing exchanges, frustrated with fees and failed KYC. On Twitter right now. We identify who they are and write exactly what you should say to them.</p>
-        <div style="background:var(--off);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;border:1px solid var(--line);">
+        <div style="background:var(--off);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;border:1px solid var(--line);transition:transform 0.35s var(--ease),box-shadow 0.35s var(--ease),border-color 0.35s;">
           <p style="font-size:13px;line-height:1.6;color:var(--ink-2);font-style:italic;">"Tried three crypto exchanges this month. Fees are insane. Anyone know a platform that actually works for Canadian businesses?"</p>
           <div style="display:flex;align-items:center;justify-content:space-between;">
             <span style="font-family:var(--mono);font-size:10px;color:var(--ink-5);letter-spacing:0.06em;text-transform:uppercase;">Real signal</span>
@@ -1147,11 +1072,11 @@ footer {
         </div>
       </article>
 
-      <article style="display:flex;flex-direction:column;gap:24px;">
+      <article style="display:flex;flex-direction:column;gap:24px;transition:transform 0.4s var(--ease);" onmouseenter="this.style.transform='translateY(-8px)'" onmouseleave="this.style.transform=''">
         <span style="font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-4);padding-bottom:24px;border-bottom:1px solid var(--line);display:block;">B2B Payments and Banking</span>
         <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.025em;line-height:1.2;color:var(--ink);">Neobanks and payment infrastructure</h3>
         <p style="font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-3);flex:1;">Business owners whose international payments fail mid-transaction. Their supplier is waiting. They need a solution right now. That urgency is visible in every word they post.</p>
-        <div style="background:var(--off);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;border:1px solid var(--line);">
+        <div style="background:var(--off);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;border:1px solid var(--line);transition:transform 0.35s var(--ease),box-shadow 0.35s var(--ease),border-color 0.35s;">
           <p style="font-size:13px;line-height:1.6;color:var(--ink-2);font-style:italic;">"Wise Business failed me again. Payment delayed 2 weeks. My supplier is threatening to cancel. Need an alternative urgently."</p>
           <div style="display:flex;align-items:center;justify-content:space-between;">
             <span style="font-family:var(--mono);font-size:10px;color:var(--ink-5);letter-spacing:0.06em;text-transform:uppercase;">Real signal</span>
@@ -1174,16 +1099,16 @@ footer {
     </div>
     <div style="display:flex;flex-direction:column;" class="r d1" role="list">
 
-      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s;align-items:start;" onmouseenter="this.style.background='#fff'" onmouseleave="this.style.background=''" tabmain="0">
+      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s,transform 0.3s var(--ease);align-items:start;position:relative;" onmouseenter="this.style.background='#fff';this.style.transform='translateX(4px)'" onmouseleave="this.style.background='';this.style.transform=''" tabindex="0">
         <span style="font-family:var(--mono);font-size:13px;color:var(--ink);font-weight:500;padding-top:3px;">8–10</span>
         <div style="display:flex;flex-direction:column;gap:5px;">
-          <h3 style="font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);display:flex;align-items:center;gap:10px;flex-wrap:wrap;">Immediate <span style="font-size:11px;font-weight:500;padding:3px 10px;border-radius:6px;background:rgba(255,107,43,0.10);color:var(--orange);">Instant Slack alert</span></h3>
+          <h3 style="font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);display:flex;align-items:center;gap:10px;flex-wrap:wrap;">Immediate <span class="tc-orange" style="font-size:11px;font-weight:500;padding:3px 10px;border-radius:6px;background:rgba(255,107,43,0.10);color:var(--orange);">Instant Slack alert</span></h3>
           <p style="font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-3);">Active buyer right now. Competitor frustration confirmed, specific amount mentioned, urgency expressed. Delivered with a ready-to-send outreach script in under 90 seconds.</p>
         </div>
       </article>
       <div style="height:1px;background:var(--line);margin:4px 20px;"></div>
 
-      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s;align-items:start;" onmouseenter="this.style.background='#fff'" onmouseleave="this.style.background=''" tabmain="0">
+      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s,transform 0.3s var(--ease);align-items:start;" onmouseenter="this.style.background='#fff';this.style.transform='translateX(4px)'" onmouseleave="this.style.background='';this.style.transform=''" tabindex="0">
         <span style="font-family:var(--mono);font-size:13px;color:var(--ink-4);padding-top:3px;">5–7</span>
         <div style="display:flex;flex-direction:column;gap:5px;">
           <h3 style="font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);display:flex;align-items:center;gap:10px;flex-wrap:wrap;">Digest <span style="font-size:11px;font-weight:500;padding:3px 10px;border-radius:6px;background:var(--blue-dim);color:var(--blue);">Daily 8am brief</span></h3>
@@ -1192,7 +1117,7 @@ footer {
       </article>
       <div style="height:1px;background:var(--line);margin:4px 20px;"></div>
 
-      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s;align-items:start;" onmouseenter="this.style.background='#fff'" onmouseleave="this.style.background=''" tabmain="0">
+      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s,transform 0.3s var(--ease);align-items:start;" onmouseenter="this.style.background='#fff';this.style.transform='translateX(4px)'" onmouseleave="this.style.background='';this.style.transform=''" tabindex="0">
         <span style="font-family:var(--mono);font-size:13px;color:var(--ink-4);padding-top:3px;">3–4</span>
         <div style="display:flex;flex-direction:column;gap:5px;">
           <h3 style="font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);display:flex;align-items:center;gap:10px;flex-wrap:wrap;">Watchlist <span style="font-size:11px;font-weight:500;padding:3px 10px;border-radius:6px;background:var(--off);color:var(--ink-3);border:1px solid var(--line);">Silent monitoring</span></h3>
@@ -1201,7 +1126,7 @@ footer {
       </article>
       <div style="height:1px;background:var(--line);margin:4px 20px;"></div>
 
-      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s;align-items:start;" onmouseenter="this.style.background='#fff'" onmouseleave="this.style.background=''" tabmain="0">
+      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s,transform 0.3s var(--ease);align-items:start;" onmouseenter="this.style.background='#fff';this.style.transform='translateX(4px)'" onmouseleave="this.style.background='';this.style.transform=''" tabindex="0">
         <span style="font-family:var(--mono);font-size:13px;color:var(--ink-5);padding-top:3px;">0–2</span>
         <div style="display:flex;flex-direction:column;gap:5px;">
           <h3 style="font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink-3);display:flex;align-items:center;gap:10px;flex-wrap:wrap;">Discarded <span style="font-size:11px;font-weight:500;padding:3px 10px;border-radius:6px;background:var(--off);color:var(--ink-5);border:1px solid var(--line);">Never shown</span></h3>
@@ -1216,7 +1141,6 @@ footer {
 <!-- ══ BLOG TEASER ══ -->
 <section id="blog-teaser" aria-labelledby="blog-teaser-h">
   <div class="blog-teaser-inner r">
-
     <div class="blog-teaser-left">
       <span class="blog-teaser-eyebrow">From the blog</span>
       <h2 class="blog-teaser-h" id="blog-teaser-h">The playbook your<br>competitors aren't <em>reading.</em></h2>
@@ -1257,7 +1181,6 @@ footer {
         <span class="btc-time">8 min read</span>
       </div>
     </a>
-
   </div>
 </section>
 
@@ -1272,17 +1195,16 @@ footer {
       Book a 15-minute call
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
-    <p class="cta-fine">hello.flintel@gmail.com · No commitment · No sales deck · No pitch</p>
+    <p class="cta-fine">hello@flintel.io · No commitment · No sales deck · No pitch</p>
   </div>
 </section>
 
 </main>
 
-<!-- FOOTER -->
 <footer>
   <span class="footer-logo">Flintel</span>
   <span class="footer-center">Signal intelligence for fintech companies</span>
-  <div class="footer-r"><a href="mailto:hello.flintel@gmail.com" class="footer-email">hello.flintel@gmail.com</a></div>
+  <div class="footer-r"><a href="mailto:hello@flintel.io" class="footer-email">hello@flintel.io</a></div>
 </footer>
 
 <script>
@@ -1461,45 +1383,6 @@ if (particleHost) {
     particleHost.appendChild(p);
   }
 }
-
-/* ── STAT COUNTERS ── */
-function animateCount(el, target, suffix, duration = 1400) {
-  const start = performance.now();
-  function step(now) {
-    const progress = Math.min((now - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    let val;
-    if (Number.isInteger(target)) {
-      val = Math.floor(eased * target);
-    } else {
-      val = (eased * target).toFixed(1);
-    }
-    el.textContent = val + suffix;
-    if (progress < 1) requestAnimationFrame(step);
-    else el.textContent = target + suffix;
-  }
-  requestAnimationFrame(step);
-}
-
-document.querySelectorAll('#stats [aria-label]').forEach(el => {
-  const text = el.textContent.trim();
-  if (text === '90s') { el.dataset.target = 90; el.dataset.suffix = 's'; }
-  else if (text === '95%') { el.dataset.target = 95; el.dataset.suffix = '%'; }
-  else { el.dataset.skip = '1'; }
-});
-
-const statsObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const el = e.target;
-      if (!el.dataset.skip) {
-        animateCount(el, parseFloat(el.dataset.target), el.dataset.suffix);
-      }
-      statsObserver.unobserve(el);
-    }
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('#stats [aria-label]').forEach(el => statsObserver.observe(el));
 
 /* ── STAGGERED REVEAL ── */
 function staggerReveal(selector, step = 70) {
