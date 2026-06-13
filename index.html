@@ -728,9 +728,16 @@ footer {
 }
 .footer-logo { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--ink); letter-spacing: -0.025em; }
 .footer-center { font-size: 12px; color: var(--ink-5); text-align: center; }
-.footer-r { display: flex; justify-content: flex-end; }
-.footer-email { font-size: 13px; color: var(--ink-4); transition: color 0.15s, padding-right 0.25s var(--ease); }
-.footer-email:hover { color: var(--blue); padding-right: 4px; }
+.footer-r { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
+.footer-email {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; color: var(--ink-4);
+  transition: color 0.15s;
+  text-decoration: none;
+}
+.footer-email:hover { color: var(--blue); }
+.footer-email svg { opacity: 0.5; transition: opacity 0.15s; flex-shrink: 0; }
+.footer-email:hover svg { opacity: 1; }
 
 /* ═══════════════════════════════════════════
    SCROLL REVEAL
@@ -819,7 +826,7 @@ footer {
       <a href="#how"     class="nav-a">How it works</a>
       <a href="#sources" class="nav-a">Sources</a>
       <a href="#tiers"   class="nav-a">Intelligence</a>
-      <a href="/blog/find-fintech-buyers-twitter"    class="nav-a">Blog</a>
+      <a href="/blog/find-fintech-buyers-twitter" class="nav-a">Blog</a>
       <a href="https://calendly.com/hello-flintel/new-meeting" target="_blank" rel="noopener noreferrer" class="nav-btn">Book a call</a>
     </div>
   </nav>
@@ -1154,7 +1161,7 @@ footer {
     <a href="/blog/find-fintech-buyers-twitter" class="blog-teaser-card r d1" aria-label="Read: How to Find Fintech Buyers on Twitter Before Your Competitors Do">
       <div class="btc-header">
         <span class="btc-badge">Latest post</span>
-        <span class="btc-date">June 2025</span>
+        <span class="btc-date">June 2026</span>
       </div>
       <div class="btc-body">
         <h3 class="btc-title">How to Find Fintech Buyers on Twitter Before Your Competitors Do</h3>
@@ -1204,7 +1211,12 @@ footer {
 <footer>
   <span class="footer-logo">Flintel</span>
   <span class="footer-center">Signal intelligence for fintech companies</span>
-  <div class="footer-r"><a href="mailto:hello.flintel@gmail.com" class="footer-email">hello.flintel@gmail.com</a></div>
+  <div class="footer-r">
+    <a href="https://mail.google.com/mail/?view=cm&to=hello.flintel@gmail.com" target="_blank" rel="noopener noreferrer" class="footer-email" aria-label="Email us — opens Gmail">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l10 7 10-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      hello.flintel@gmail.com
+    </a>
+  </div>
 </footer>
 
 <script>
