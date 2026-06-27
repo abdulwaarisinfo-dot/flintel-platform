@@ -77,14 +77,24 @@ a{color:inherit;text-decoration:none}
   font-size: 20px; font-weight: 600;
   color: var(--ink); letter-spacing: -0.025em;
   display: flex; align-items: center;
+  transition: opacity 0.3s;
 }
+.nav-logo:hover { opacity: 0.7; }
 .nav-logo svg { display: block; }
 .nav-links { display: flex; gap: 32px; align-items: center; }
 .nav-a {
   font-size: 13px; font-weight: 400;
   color: var(--ink-3); transition: color 0.15s;
+  position: relative;
 }
 .nav-a:hover { color: var(--ink); }
+.nav-a::after {
+  content:''; position:absolute; left:0; bottom:-6px;
+  width:100%; height:1px; background:var(--ink);
+  transform: scaleX(0); transform-origin: right;
+  transition: transform 0.35s var(--ease);
+}
+.nav-a:hover::after { transform: scaleX(1); transform-origin: left; }
 .nav-btn {
   font-size: 13px; font-weight: 500;
   color: var(--white); background: var(--ink);
@@ -92,6 +102,47 @@ a{color:inherit;text-decoration:none}
   transition: transform 0.2s, background 0.2s;
 }
 .nav-btn:hover { background: var(--ink-2); transform: scale(1.03); }
+
+/* Mobile nav toggle */
+.nav-hamburger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 4px;
+  background: none; border: none;
+  z-index: 1001;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--ink);
+  transition: transform 0.3s var(--ease), opacity 0.3s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile drawer */
+.nav-drawer {
+  display: none;
+  position: fixed; inset: 0; top: 52px;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 998;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 36px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s var(--ease);
+}
+.nav-drawer.open {
+  opacity: 1; pointer-events: all;
+}
+.nav-drawer .nav-a {
+  font-size: 22px; font-weight: 400; color: var(--ink);
+}
+.nav-drawer .nav-btn {
+  font-size: 15px; padding: 12px 32px;
+}
 
 /* ═══════════════════════════════════════════
    HERO
@@ -130,7 +181,7 @@ a{color:inherit;text-decoration:none}
 }
 #hero.glow-active .hero-glow { opacity: 1; }
 
-.hero-content { position:relative; z-index:1; }
+.hero-content { position:relative; z-index:1; max-width: 760px; width: 100%; }
 
 .hero-tag {
   display: inline-flex; align-items: center; gap: 8px;
@@ -146,6 +197,7 @@ a{color:inherit;text-decoration:none}
   box-shadow: 0 0 0 0 rgba(40,205,65,0.4);
   animation: pipPulse 2s ease infinite;
   transition: transform 0.3s var(--ease);
+  flex-shrink: 0;
 }
 .hero-tag:hover .pip { transform: scale(1.4); }
 
@@ -228,7 +280,7 @@ a{color:inherit;text-decoration:none}
   transition: opacity 0.5s, transform 0.6s; pointer-events:none;
 }
 .cta-main:active::before { opacity:1; transform: scale(1.6); transition: 0s; }
-.cta-main svg { transition: transform 0.35s var(--ease); }
+.cta-main svg { transition: transform 0.35s var(--ease); flex-shrink: 0; }
 .cta-main:hover svg { transform: translateX(4px); }
 
 .cta-ghost {
@@ -304,6 +356,7 @@ a{color:inherit;text-decoration:none}
   border-bottom: 1px solid var(--line);
   display: flex; align-items: center; justify-content: space-between;
   background: var(--off-2);
+  flex-wrap: wrap; gap: 8px;
 }
 .lc-title {
   font-family: var(--mono); font-size: 10px;
@@ -424,7 +477,7 @@ a{color:inherit;text-decoration:none}
 }
 .outreach-text { font-size: 13px; font-weight: 300; line-height: 1.65; color: var(--ink-2); }
 
-.dest-row { display: flex; gap: 8px; align-items: center; }
+.dest-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .dest-label { font-size: 11px; color: var(--ink-4); margin-right: 2px; }
 .dest-chip {
   font-size: 11px; font-weight: 400;
@@ -502,6 +555,220 @@ a{color:inherit;text-decoration:none}
   transition: opacity 0.7s var(--ease), transform 0.7s var(--ease), filter 0.7s var(--ease);
 }
 .statement.r.in .statement-h .w { opacity:1; transform:translateY(0) rotate(0); filter: blur(0); }
+
+/* ═══════════════════════════════════════════
+   HOW IT WORKS
+═══════════════════════════════════════════ */
+#how { padding: 160px 32px; background: var(--white); border-top: 1px solid var(--line); }
+.how-inner { max-width: 1080px; margin: 0 auto; }
+.how-header { margin-bottom: 100px; max-width: 560px; }
+.how-kicker {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-4); display: block; margin-bottom: 20px;
+}
+.how-h {
+  font-family: var(--serif); font-size: clamp(40px,5.5vw,68px);
+  font-weight: 500; letter-spacing: -0.04em; line-height: 1.07;
+  color: var(--ink); margin-bottom: 20px;
+}
+.how-h em { font-weight: 300; color: var(--ink-3); }
+.how-sub { font-size: 18px; font-weight: 300; line-height: 1.7; color: var(--ink-3); }
+.how-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 0; position: relative;
+}
+.how-grid::before {
+  content:''; position:absolute; top:20px; left:calc(100%/6);
+  width:calc(100% - 100%/3); height:1px; background:var(--line);
+}
+.how-step {
+  display: flex; flex-direction: column; gap: 20px;
+  padding-right: 56px;
+  transition: transform 0.4s var(--ease);
+}
+.how-step:last-child { padding-right: 0; }
+.how-step:hover { transform: translateY(-6px); }
+.how-num {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--line); background: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 12px; color: var(--ink-3);
+  position: relative; z-index: 1; flex-shrink: 0;
+  transition: background 0.3s, color 0.3s, transform 0.4s var(--ease), border-color 0.3s;
+}
+.how-step-title {
+  font-size: 21px; font-weight: 600; letter-spacing: -0.025em; color: var(--ink);
+}
+.how-step-body {
+  font-size: 15px; font-weight: 300; line-height: 1.72; color: var(--ink-3);
+}
+
+/* ═══════════════════════════════════════════
+   STATS
+═══════════════════════════════════════════ */
+#stats { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--white); }
+.stats-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  max-width: 1080px; margin: 0 auto;
+}
+.stat-cell {
+  padding: 100px 56px;
+  display: flex; flex-direction: column; gap: 14px;
+  border-right: 1px solid var(--line);
+  transition: background 0.4s var(--ease);
+}
+.stat-cell:last-child { border-right: none; }
+.stat-cell:hover { background: var(--off); }
+.stat-num {
+  font-family: var(--serif);
+  font-size: clamp(72px,9vw,112px);
+  font-weight: 300; font-style: italic;
+  letter-spacing: -0.05em; line-height: 1;
+  color: var(--ink);
+}
+.stat-desc {
+  font-size: 15px; font-weight: 300; line-height: 1.55;
+  color: var(--ink-3); max-width: 200px;
+}
+
+/* ═══════════════════════════════════════════
+   SOURCES
+═══════════════════════════════════════════ */
+#sources { padding: 160px 32px; background: var(--off); border-top: 1px solid var(--line); }
+.sources-inner { max-width: 1080px; margin: 0 auto; }
+.sources-header { margin-bottom: 80px; }
+.sources-kicker {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-4); display: block; margin-bottom: 20px;
+}
+.sources-h {
+  font-family: var(--serif); font-size: clamp(36px,5vw,60px);
+  font-weight: 500; letter-spacing: -0.04em; line-height: 1.08; color: var(--ink);
+}
+.sources-h em { font-weight: 300; color: var(--ink-3); }
+.source-row {
+  display: grid; grid-template-columns: 60px 1fr 1.4fr auto;
+  align-items: center; gap: 48px; padding: 32px 0;
+  border-top: 1px solid var(--line);
+  transition: background 0.35s, padding-left 0.35s var(--ease);
+}
+.source-row:last-child { border-bottom: 1px solid var(--line); }
+.source-row:hover { background: var(--white); padding-left: 12px; }
+.source-icon { font-size: 24px; color: var(--ink-4); font-family: var(--mono); }
+.source-name { font-size: 22px; font-weight: 600; letter-spacing: -0.025em; color: var(--ink); }
+.source-desc { font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--ink-3); }
+.source-badge {
+  font-size: 11px; font-weight: 500; color: var(--ink-3);
+  background: var(--white); border: 1px solid var(--line);
+  padding: 5px 12px; border-radius: 7px; white-space: nowrap;
+}
+.source-badge-orange {
+  font-size: 11px; font-weight: 500; color: var(--orange);
+  background: rgba(255,107,43,0.08); border: 1px solid rgba(255,107,43,0.15);
+  padding: 5px 12px; border-radius: 7px; white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════
+   WHO
+═══════════════════════════════════════════ */
+#who { padding: 160px 32px; background: var(--white); border-top: 1px solid var(--line); }
+.who-inner { max-width: 1080px; margin: 0 auto; }
+.who-header { margin-bottom: 80px; }
+.who-kicker {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-4); display: block; margin-bottom: 20px;
+}
+.who-h {
+  font-family: var(--serif); font-size: clamp(36px,5vw,60px);
+  font-weight: 500; letter-spacing: -0.04em; line-height: 1.08; color: var(--ink);
+}
+.who-h em { font-weight: 300; color: var(--ink-3); }
+.who-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 48px; }
+.who-card {
+  display: flex; flex-direction: column; gap: 24px;
+  transition: transform 0.4s var(--ease);
+}
+.who-card:hover { transform: translateY(-8px); }
+.who-card-kicker {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-4);
+  padding-bottom: 24px; border-bottom: 1px solid var(--line); display: block;
+}
+.who-card-title { font-size: 21px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.2; color: var(--ink); }
+.who-card-body { font-size: 15px; font-weight: 300; line-height: 1.72; color: var(--ink-3); flex: 1; }
+.who-signal {
+  background: var(--off); border-radius: 16px; padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
+  border: 1px solid var(--line);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s;
+}
+.who-signal:hover { transform: translateY(-2px); }
+.who-signal-quote { font-size: 13px; line-height: 1.6; color: var(--ink-2); font-style: italic; font-weight: 300; }
+.who-signal-footer { display: flex; align-items: center; justify-content: space-between; }
+.who-signal-label {
+  font-family: var(--mono); font-size: 10px; color: var(--ink-5);
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.who-signal-score {
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  color: var(--orange); background: rgba(255,107,43,0.08);
+  padding: 3px 9px; border-radius: 5px;
+}
+
+/* ═══════════════════════════════════════════
+   TIERS
+═══════════════════════════════════════════ */
+#tiers { padding: 160px 32px; background: var(--off); border-top: 1px solid var(--line); }
+.tiers-inner {
+  max-width: 1080px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 120px; align-items: start;
+}
+.tiers-sticky {
+  position: sticky; top: 80px;
+  display: flex; flex-direction: column; gap: 24px;
+}
+.tiers-kicker {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-4); display: block;
+}
+.tiers-h {
+  font-family: var(--serif); font-size: clamp(36px,4.5vw,56px);
+  font-weight: 500; letter-spacing: -0.04em; line-height: 1.08; color: var(--ink);
+}
+.tiers-h em { font-weight: 300; color: var(--ink-3); }
+.tiers-sub { font-size: 16px; font-weight: 300; line-height: 1.7; color: var(--ink-3); }
+.tier-list { display: flex; flex-direction: column; }
+.tier-item {
+  display: grid; grid-template-columns: 56px 1fr; gap: 20px;
+  padding: 28px 20px; border-radius: 16px;
+  transition: background 0.2s, transform 0.3s var(--ease);
+  align-items: start;
+}
+.tier-item:hover { background: var(--white); transform: translateX(4px); }
+.tier-score { font-family: var(--mono); font-size: 13px; color: var(--ink); font-weight: 500; padding-top: 3px; }
+.tier-score-dim { color: var(--ink-4); }
+.tier-score-dimmer { color: var(--ink-5); }
+.tier-divider { height: 1px; background: var(--line); margin: 4px 20px; }
+.tier-name {
+  font-size: 18px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink);
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 5px;
+}
+.tier-name-dim { color: var(--ink-3); }
+.tier-badge-orange {
+  font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 6px;
+  background: rgba(255,107,43,0.10); color: var(--orange);
+}
+.tier-badge-blue {
+  font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 6px;
+  background: var(--blue-dim); color: var(--blue);
+}
+.tier-badge-neutral {
+  font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 6px;
+  background: var(--off); color: var(--ink-3); border: 1px solid var(--line);
+}
+.tier-desc { font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--ink-3); }
+.tier-desc-dim { color: var(--ink-4); }
 
 /* ═══════════════════════════════════════════
    BLOG TEASER
@@ -598,7 +865,7 @@ a{color:inherit;text-decoration:none}
   border: 1px solid var(--line);
 }
 .btc-signal-top {
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;
 }
 .btc-platform {
   font-family: var(--mono); font-size: 9px;
@@ -632,15 +899,6 @@ a{color:inherit;text-decoration:none}
 .blog-teaser-card:hover .btc-read { gap: 10px; }
 .btc-time {
   font-family: var(--mono); font-size: 10px; color: var(--ink-5);
-}
-
-/* ═══════════════════════════════════════════
-   STATS
-═══════════════════════════════════════════ */
-#stats {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  background: var(--white);
 }
 
 /* ═══════════════════════════════════════════
@@ -707,7 +965,7 @@ a{color:inherit;text-decoration:none}
   transition: opacity 0.5s, transform 0.6s; pointer-events:none;
 }
 .cta-btn:active::before { opacity:1; transform: scale(1.6); transition: 0s; }
-.cta-btn svg { transition: transform 0.35s var(--ease); }
+.cta-btn svg { transition: transform 0.35s var(--ease); flex-shrink: 0; }
 .cta-btn:hover svg { transform: translateX(4px); }
 .cta-fine { margin-top: 24px; font-size: 12px; color: rgba(255,255,255,0.2); letter-spacing: 0.02em; }
 
@@ -731,10 +989,11 @@ footer {
   border-top: 1px solid var(--line);
   display: grid; grid-template-columns: 1fr auto 1fr;
   align-items: center; background: var(--white);
+  gap: 16px;
 }
 .footer-logo { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--ink); letter-spacing: -0.025em; }
 .footer-center { font-size: 12px; color: var(--ink-5); text-align: center; }
-.footer-r { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
+.footer-r { display: flex; justify-content: flex-end; align-items: center; gap: 16px; flex-wrap: wrap; }
 .footer-email {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 13px; color: var(--ink-4);
@@ -761,38 +1020,8 @@ footer {
 .live-card.r.in { transform: none; }
 
 /* ═══════════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════════ */
-@media (max-width: 960px) {
-  .lc-body { grid-template-columns: 1fr; }
-  .lc-left { border-right: none; border-bottom: 1px solid var(--line); }
-  .blog-teaser-inner { grid-template-columns: 1fr; gap: 40px; }
-  footer { grid-template-columns: 1fr; gap: 12px; text-align: center; }
-  .footer-r { justify-content: center; }
-  #nav { padding: 0 20px; }
-  .nav-links .nav-a { display: none; }
-}
-@media (max-width: 640px) {
-  .hero-h { font-size: clamp(34px, 10vw, 48px); }
-  .statement { padding: 100px 24px; }
-  #blog-teaser { padding: 80px 24px; }
-  #cta { padding: 120px 24px; }
-}
-
-/* ═══════════════════════════════════════════
    MICRO-INTERACTIONS
 ═══════════════════════════════════════════ */
-.nav-a { position: relative; }
-.nav-a::after {
-  content:''; position:absolute; left:0; bottom:-6px;
-  width:100%; height:1px; background:var(--ink);
-  transform: scaleX(0); transform-origin: right;
-  transition: transform 0.35s var(--ease);
-}
-.nav-a:hover::after { transform: scaleX(1); transform-origin: left; }
-.nav-logo { transition: opacity 0.3s; }
-.nav-logo:hover { opacity: 0.7; }
-
 .tc-orange { animation: chipGlow 3s ease-in-out infinite; }
 @keyframes chipGlow {
   0%,100% { box-shadow: 0 0 0 0 rgba(255,107,43,0); }
@@ -805,6 +1034,152 @@ footer {
   width: 0%; transition: width 0.1s linear;
 }
 
+/* ═══════════════════════════════════════════
+   RESPONSIVE — 1200px
+═══════════════════════════════════════════ */
+@media (max-width: 1200px) {
+  .tiers-inner { gap: 60px; }
+  .how-step { padding-right: 36px; }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — 960px (tablet landscape)
+═══════════════════════════════════════════ */
+@media (max-width: 960px) {
+  #nav { padding: 0 20px; }
+  .nav-links .nav-a { display: none; }
+  .nav-links .nav-btn { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-drawer { display: flex; }
+
+  /* Hero */
+  #hero { padding: 90px 24px 72px; }
+
+  /* Demo card */
+  .lc-body { grid-template-columns: 1fr; }
+  .lc-left { padding: 32px 28px; border-right: none; border-bottom: 1px solid var(--line); }
+  .lc-left::after { display: none; }
+  .lc-right { padding: 32px 28px; }
+  .demo-inner { padding: 80px 24px; }
+
+  /* Statement */
+  .statement { padding: 100px 24px; }
+
+  /* How */
+  #how { padding: 100px 24px; }
+  .how-header { margin-bottom: 56px; }
+  .how-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .how-grid::before { display: none; }
+  .how-step { padding-right: 0; }
+  .how-step:hover { transform: none; }
+
+  /* Stats */
+  .stats-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+  .stat-cell {
+    padding: 60px 40px;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .stat-cell:last-child { border-bottom: none; }
+
+  /* Sources */
+  #sources { padding: 100px 24px; }
+  .source-row {
+    grid-template-columns: 48px 1fr;
+    gap: 16px;
+    padding: 24px 0;
+  }
+  .source-desc { display: none; }
+  .source-badge, .source-badge-orange { display: none; }
+  .source-row:hover { padding-left: 8px; }
+
+  /* Who */
+  #who { padding: 100px 24px; }
+  .who-grid { grid-template-columns: 1fr; gap: 48px; }
+  .who-card:hover { transform: none; }
+
+  /* Tiers */
+  #tiers { padding: 100px 24px; }
+  .tiers-inner { grid-template-columns: 1fr; gap: 48px; }
+  .tiers-sticky { position: static; }
+
+  /* Blog teaser */
+  #blog-teaser { padding: 80px 24px; }
+  .blog-teaser-inner { grid-template-columns: 1fr; gap: 40px; }
+
+  /* CTA */
+  #cta { padding: 120px 24px; }
+
+  /* Footer */
+  footer {
+    grid-template-columns: 1fr;
+    gap: 12px; text-align: center;
+    padding: 24px 20px;
+  }
+  .footer-r { justify-content: center; }
+  .footer-logo { text-align: center; }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — 640px (mobile)
+═══════════════════════════════════════════ */
+@media (max-width: 640px) {
+  /* Hero */
+  .hero-h { font-size: clamp(34px, 10vw, 48px); }
+  .hero-actions { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto; }
+  .cta-main, .cta-ghost { width: 100%; justify-content: center; }
+
+  /* Demo */
+  .lc-left { padding: 24px 20px; }
+  .lc-right { padding: 24px 20px; }
+  .lc-bar { padding: 14px 20px; }
+  .score-num { font-size: 44px; }
+  .demo-label { font-size: 10px; margin-bottom: 32px; }
+
+  /* Statement */
+  .statement { padding: 80px 20px; }
+  .statement-h { font-size: clamp(32px, 9vw, 52px); }
+
+  /* How */
+  .how-sub { font-size: 16px; }
+
+  /* Stats */
+  .stat-cell { padding: 48px 28px; }
+  .stat-num { font-size: clamp(64px, 16vw, 88px); }
+
+  /* Sources — show desc on mobile (collapsed view no longer applies) */
+  .source-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 20px 0;
+  }
+  .source-icon { font-size: 20px; }
+  .source-name { font-size: 18px; }
+  .source-desc { display: block; font-size: 13px; }
+  .source-badge, .source-badge-orange { display: inline-block; }
+
+  /* Tiers */
+  .tier-item { grid-template-columns: 44px 1fr; gap: 12px; }
+
+  /* CTA */
+  #cta { padding: 80px 20px; }
+  .cta-h { font-size: clamp(36px, 10vw, 60px); }
+  .cta-btn { width: 100%; max-width: 300px; justify-content: center; }
+
+  /* Blog teaser */
+  .blog-teaser-h { font-size: clamp(24px, 7vw, 34px); }
+  #blog-teaser { padding: 60px 20px; }
+}
+
+/* ═══════════════════════════════════════════
+   REDUCED MOTION
+═══════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
   .hero-h .row-inner, .hero-tag, .hero-sub, .hero-actions, .hero-proof, .scroll-cue, .r {
     opacity: 1 !important; transform: none !important;
@@ -837,7 +1212,19 @@ footer {
       <a href="/blog/find-fintech-buyers-twitter" class="nav-a">Blog</a>
       <a href="https://calendly.com/hello-flintel/new-meeting" target="_blank" rel="noopener noreferrer" class="nav-btn">Book a call</a>
     </div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Navigation menu">
+    <a href="#how"     class="nav-a" data-drawer-close>How it works</a>
+    <a href="#sources" class="nav-a" data-drawer-close>Sources</a>
+    <a href="#tiers"   class="nav-a" data-drawer-close>Intelligence</a>
+    <a href="/blog/find-fintech-buyers-twitter" class="nav-a" data-drawer-close>Blog</a>
+    <a href="https://calendly.com/hello-flintel/new-meeting" target="_blank" rel="noopener noreferrer" class="nav-btn" data-drawer-close>Book a call</a>
+  </div>
 </header>
 
 <main id="main">
@@ -882,7 +1269,7 @@ footer {
 </section>
 
 <!-- ══ STATEMENT 1 ══ -->
-<div class="statement light r" aria-hidden="true" style="padding:80px 32px; border-top:1px solid var(--line);">
+<div class="statement light r" style="padding:80px 32px; border-top:1px solid var(--line);">
   <p class="statement-kicker">The problem</p>
   <h2 class="statement-h"><span class="w">Your</span> <span class="w">next</span> <span class="w">customer</span><br><span class="w">posted</span> <span class="w">publicly</span><br><em><span class="w">10</span> <span class="w">minutes</span> <span class="w">ago.</span></em></h2>
   <p class="statement-p">They are frustrated. Comparing competitors. Ready to switch. And right now they have no idea you exist.</p>
@@ -956,34 +1343,33 @@ footer {
 </section>
 
 <!-- ══ HOW ══ -->
-<section id="how" aria-labelledby="how-h" style="padding:160px 32px; background:var(--white); border-top:1px solid var(--line);">
-  <div style="max-width:1080px; margin:0 auto;">
-    <div class="r" style="margin-bottom:100px; max-width:560px;">
-      <span style="font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-4);display:block;margin-bottom:20px;">How it works</span>
-      <h2 style="font-family:var(--serif);font-size:clamp(40px,5.5vw,68px);font-weight:500;letter-spacing:-0.04em;line-height:1.07;color:var(--ink);margin-bottom:20px;" id="how-h">Three layers.<br><em style="font-weight:300;color:var(--ink-3);">Zero noise.</em></h2>
-      <p style="font-size:18px;font-weight:300;line-height:1.7;color:var(--ink-3);">Most signal tools flood your team with irrelevant alerts. Flintel's three-layer architecture means every signal your team sees is a real buyer — in the moment they need you.</p>
+<section id="how" aria-labelledby="how-h">
+  <div class="how-inner">
+    <div class="r how-header">
+      <span class="how-kicker">How it works</span>
+      <h2 class="how-h" id="how-h">Three layers.<br><em>Zero noise.</em></h2>
+      <p class="how-sub">Most signal tools flood your team with irrelevant alerts. Flintel's three-layer architecture means every signal your team sees is a real buyer — in the moment they need you.</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;" class="r d1">
-      <div style="content:'';position:absolute;top:20px;left:calc(100%/6);width:calc(100% - 100%/3);height:1px;background:var(--line);"></div>
-      <article style="display:flex;flex-direction:column;gap:20px;padding-right:56px;transition:transform 0.4s var(--ease);" onmouseenter="this.style.transform='translateY(-6px)'" onmouseleave="this.style.transform=''">
-        <div style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);position:relative;z-index:1;flex-shrink:0;transition:background 0.3s,color 0.3s,transform 0.4s var(--ease),border-color 0.3s;">01</div>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">The Listener</h3>
-          <p style="font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-3);">Monitors Twitter, Reddit, Telegram and competitor reviews continuously. Searches your exact buyer keywords across millions of posts every 60 seconds. Never sleeps. Never misses.</p>
+    <div class="how-grid r d1">
+      <article class="how-step">
+        <div class="how-num">01</div>
+        <div>
+          <h3 class="how-step-title" style="margin-bottom:10px;">The Listener</h3>
+          <p class="how-step-body">Monitors Twitter, Reddit, Telegram and competitor reviews continuously. Searches your exact buyer keywords across millions of posts every 60 seconds. Never sleeps. Never misses.</p>
         </div>
       </article>
-      <article style="display:flex;flex-direction:column;gap:20px;padding-right:56px;transition:transform 0.4s var(--ease);" onmouseenter="this.style.transform='translateY(-6px)'" onmouseleave="this.style.transform=''">
-        <div style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);position:relative;z-index:1;flex-shrink:0;transition:background 0.3s,color 0.3s,transform 0.4s var(--ease),border-color 0.3s;">02</div>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">The Filter</h3>
-          <p style="font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-3);">A two-layer system removes 95% of irrelevant content before AI ever processes it. Consumer subscriptions, wrong geography, personal payments — all eliminated instantly at zero cost.</p>
+      <article class="how-step">
+        <div class="how-num">02</div>
+        <div>
+          <h3 class="how-step-title" style="margin-bottom:10px;">The Filter</h3>
+          <p class="how-step-body">A two-layer system removes 95% of irrelevant content before AI ever processes it. Consumer subscriptions, wrong geography, personal payments — all eliminated instantly at zero cost.</p>
         </div>
       </article>
-      <article style="display:flex;flex-direction:column;gap:20px;transition:transform 0.4s var(--ease);" onmouseenter="this.style.transform='translateY(-6px)'" onmouseleave="this.style.transform=''">
-        <div style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);position:relative;z-index:1;flex-shrink:0;transition:background 0.3s,color 0.3s,transform 0.4s var(--ease),border-color 0.3s;">03</div>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">The Intelligence</h3>
-          <p style="font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-3);">AI reads each post, scores buying intent 0–10, identifies the buyer, writes the exact outreach message, and delivers a complete signal card to Slack and HubSpot in under 90 seconds.</p>
+      <article class="how-step">
+        <div class="how-num">03</div>
+        <div>
+          <h3 class="how-step-title" style="margin-bottom:10px;">The Intelligence</h3>
+          <p class="how-step-body">AI reads each post, scores buying intent 0–10, identifies the buyer, writes the exact outreach message, and delivers a complete signal card to Slack and HubSpot in under 90 seconds.</p>
         </div>
       </article>
     </div>
@@ -998,104 +1384,104 @@ footer {
 </div>
 
 <!-- ══ STATS ══ -->
-<section id="stats" aria-label="Key metrics" style="border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--white);">
+<section id="stats" aria-label="Key metrics">
   <h2 class="sr-only">Key metrics</h2>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);max-width:1080px;margin:0 auto;">
-    <div style="padding:100px 56px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:14px;transition:background 0.4s var(--ease);" class="r" onmouseenter="this.style.background='var(--off)'" onmouseleave="this.style.background=''">
-      <div style="font-family:var(--serif);font-size:clamp(72px,9vw,112px);font-weight:300;font-style:italic;letter-spacing:-0.05em;line-height:1;color:var(--ink);transition:transform 0.4s var(--ease),color 0.4s var(--ease);" aria-label="90 seconds">90s</div>
-      <p style="font-size:15px;font-weight:300;line-height:1.55;color:var(--ink-3);max-width:200px;">From public post to Slack alert. Every time. Without exception.</p>
+  <div class="stats-grid">
+    <div class="stat-cell r">
+      <div class="stat-num" aria-label="90 seconds">90s</div>
+      <p class="stat-desc">From public post to Slack alert. Every time. Without exception.</p>
     </div>
-    <div style="padding:100px 56px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:14px;transition:background 0.4s var(--ease);" class="r d1" onmouseenter="this.style.background='var(--off)'" onmouseleave="this.style.background=''">
-      <div style="font-family:var(--serif);font-size:clamp(72px,9vw,112px);font-weight:300;font-style:italic;letter-spacing:-0.05em;line-height:1;color:var(--ink);transition:transform 0.4s var(--ease),color 0.4s var(--ease);" aria-label="24 hours a day, 7 days a week">24/7</div>
-      <p style="font-size:15px;font-weight:300;line-height:1.55;color:var(--ink-3);max-width:200px;">Continuous monitoring across every source and every market.</p>
+    <div class="stat-cell r d1">
+      <div class="stat-num" aria-label="24 hours a day, 7 days a week">24/7</div>
+      <p class="stat-desc">Continuous monitoring across every source and every market.</p>
     </div>
-    <div style="padding:100px 56px;display:flex;flex-direction:column;gap:14px;transition:background 0.4s var(--ease);" class="r d2" onmouseenter="this.style.background='var(--off)'" onmouseleave="this.style.background=''">
-      <div style="font-family:var(--serif);font-size:clamp(72px,9vw,112px);font-weight:300;font-style:italic;letter-spacing:-0.05em;line-height:1;color:var(--ink);transition:transform 0.4s var(--ease),color 0.4s var(--ease);" aria-label="95 percent">95%</div>
-      <p style="font-size:15px;font-weight:300;line-height:1.55;color:var(--ink-3);max-width:200px;">Noise removed before your team sees a single irrelevant alert.</p>
+    <div class="stat-cell r d2">
+      <div class="stat-num" aria-label="95 percent">95%</div>
+      <p class="stat-desc">Noise removed before your team sees a single irrelevant alert.</p>
     </div>
   </div>
 </section>
 
 <!-- ══ SOURCES ══ -->
-<section id="sources" aria-labelledby="sources-h" style="padding:160px 32px;background:var(--off);border-top:1px solid var(--line);">
-  <div style="max-width:1080px;margin:0 auto;">
-    <div class="r" style="margin-bottom:80px;">
-      <span style="font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-4);display:block;margin-bottom:20px;">Signal sources</span>
-      <h2 style="font-family:var(--serif);font-size:clamp(36px,5vw,60px);font-weight:500;letter-spacing:-0.04em;line-height:1.08;color:var(--ink);" id="sources-h">We monitor where<br>your buyers<br><em style="font-weight:300;color:var(--ink-3);">actually talk.</em></h2>
+<section id="sources" aria-labelledby="sources-h">
+  <div class="sources-inner">
+    <div class="r sources-header">
+      <span class="sources-kicker">Signal sources</span>
+      <h2 class="sources-h" id="sources-h">We monitor where<br>your buyers<br><em>actually talk.</em></h2>
     </div>
-    <div style="display:flex;flex-direction:column;" class="r d1">
-      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);transition:background 0.35s,padding-left 0.35s var(--ease),transform 0.35s var(--ease);" tabindex="0" onmouseenter="this.style.background='var(--white)';this.style.paddingLeft='12px'" onmouseleave="this.style.background='';this.style.paddingLeft=''">
-        <span style="font-size:24px;color:var(--ink-4);font-family:var(--mono);transition:transform 0.5s var(--ease),color 0.3s;">𝕏</span>
-        <span style="font-size:22px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">Twitter / X</span>
-        <span style="font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-3);">Founders vent publicly the moment something breaks. Real-time keyword streaming across 500 million daily users. Highest urgency, highest intent.</span>
-        <span style="font-size:11px;font-weight:500;color:var(--ink-3);background:var(--white);border:1px solid var(--line);padding:5px 12px;border-radius:7px;white-space:nowrap;">Primary source</span>
+    <div class="r d1">
+      <article class="source-row" tabindex="0">
+        <span class="source-icon">𝕏</span>
+        <span class="source-name">Twitter / X</span>
+        <span class="source-desc">Founders vent publicly the moment something breaks. Real-time keyword streaming across 500 million daily users. Highest urgency, highest intent.</span>
+        <span class="source-badge">Primary source</span>
       </article>
-      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);transition:background 0.35s,padding-left 0.35s var(--ease),transform 0.35s var(--ease);" tabindex="0" onmouseenter="this.style.background='var(--white)';this.style.paddingLeft='12px'" onmouseleave="this.style.background='';this.style.paddingLeft=''">
-        <span style="font-size:24px;color:var(--ink-4);font-family:var(--mono);">◈</span>
-        <span style="font-size:22px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">Reddit</span>
-        <span style="font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-3);">Business owners write detailed, context-rich posts in relevant communities. A complete picture of where the buyer sits in their decision journey.</span>
-        <span style="font-size:11px;font-weight:500;color:var(--ink-3);background:var(--white);border:1px solid var(--line);padding:5px 12px;border-radius:7px;white-space:nowrap;">High context</span>
+      <article class="source-row" tabindex="0">
+        <span class="source-icon">◈</span>
+        <span class="source-name">Reddit</span>
+        <span class="source-desc">Business owners write detailed, context-rich posts in relevant communities. A complete picture of where the buyer sits in their decision journey.</span>
+        <span class="source-badge">High context</span>
       </article>
-      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);transition:background 0.35s,padding-left 0.35s var(--ease),transform 0.35s var(--ease);" tabindex="0" onmouseenter="this.style.background='var(--white)';this.style.paddingLeft='12px'" onmouseleave="this.style.background='';this.style.paddingLeft=''">
-        <span style="font-size:24px;color:var(--ink-4);font-family:var(--mono);">★</span>
-        <span style="font-size:22px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">Competitor Reviews</span>
-        <span style="font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-3);">Someone leaving a one-star review has already decided to leave. The hottest lead in existence. Found on Trustpilot and Google within seconds of publishing.</span>
-        <span class="tc-orange" style="font-size:11px;font-weight:500;color:var(--orange);background:rgba(255,107,43,0.08);border:1px solid rgba(255,107,43,0.15);padding:5px 12px;border-radius:7px;white-space:nowrap;">Hottest signals</span>
+      <article class="source-row" tabindex="0">
+        <span class="source-icon">★</span>
+        <span class="source-name">Competitor Reviews</span>
+        <span class="source-desc">Someone leaving a one-star review has already decided to leave. The hottest lead in existence. Found on Trustpilot and Google within seconds of publishing.</span>
+        <span class="source-badge-orange tc-orange">Hottest signals</span>
       </article>
-      <article style="display:grid;grid-template-columns:60px 1fr 1.4fr auto;align-items:center;gap:48px;padding:32px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);transition:background 0.35s,padding-left 0.35s var(--ease),transform 0.35s var(--ease);" tabindex="0" onmouseenter="this.style.background='var(--white)';this.style.paddingLeft='12px'" onmouseleave="this.style.background='';this.style.paddingLeft=''">
-        <span style="font-size:24px;color:var(--ink-4);font-family:var(--mono);">◉</span>
-        <span style="font-size:22px;font-weight:600;letter-spacing:-0.025em;color:var(--ink);">Telegram</span>
-        <span style="font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-3);">Diaspora communities where buyers openly compare services and share frustrations. The intelligence layer that competitors never think to monitor.</span>
-        <span style="font-size:11px;font-weight:500;color:var(--ink-3);background:var(--white);border:1px solid var(--line);padding:5px 12px;border-radius:7px;white-space:nowrap;">Community intel</span>
+      <article class="source-row" tabindex="0">
+        <span class="source-icon">◉</span>
+        <span class="source-name">Telegram</span>
+        <span class="source-desc">Diaspora communities where buyers openly compare services and share frustrations. The intelligence layer that competitors never think to monitor.</span>
+        <span class="source-badge">Community intel</span>
       </article>
     </div>
   </div>
 </section>
 
 <!-- ══ WHO ══ -->
-<section id="who" aria-labelledby="who-h" style="padding:160px 32px;background:var(--white);border-top:1px solid var(--line);">
-  <div style="max-width:1080px;margin:0 auto;">
-    <div class="r" style="margin-bottom:80px;">
-      <span style="font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-4);display:block;margin-bottom:20px;">Built for</span>
-      <h2 style="font-family:var(--serif);font-size:clamp(36px,5vw,60px);font-weight:500;letter-spacing:-0.04em;line-height:1.08;color:var(--ink);" id="who-h">If you sell to businesses<br>making cross-border payments,<br><em style="font-weight:300;color:var(--ink-3);">this is for you.</em></h2>
+<section id="who" aria-labelledby="who-h">
+  <div class="who-inner">
+    <div class="r who-header">
+      <span class="who-kicker">Built for</span>
+      <h2 class="who-h" id="who-h">If you sell to businesses<br>making cross-border payments,<br><em>this is for you.</em></h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:48px;" class="r d1">
+    <div class="who-grid r d1">
 
-      <article style="display:flex;flex-direction:column;gap:24px;transition:transform 0.4s var(--ease);" onmouseenter="this.style.transform='translateY(-8px)'" onmouseleave="this.style.transform=''">
-        <span style="font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-4);padding-bottom:24px;border-bottom:1px solid var(--line);display:block;">FX and Remittance</span>
-        <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.025em;line-height:1.2;color:var(--ink);">Cross-border payment platforms</h3>
-        <p style="font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-3);flex:1;">Diaspora businesses comparing corridors, hitting bank blocks, searching for better rates — posting publicly every single day. Find them before your competitors do.</p>
-        <div style="background:var(--off);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;border:1px solid var(--line);transition:transform 0.35s var(--ease),box-shadow 0.35s var(--ease),border-color 0.35s;">
-          <p style="font-size:13px;line-height:1.6;color:var(--ink-2);font-style:italic;">"Bank blocked my $45k CAD Lagos supplier payment again. Third time this month. Anyone know a better cross-border solution?"</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-family:var(--mono);font-size:10px;color:var(--ink-5);letter-spacing:0.06em;text-transform:uppercase;">Real signal</span>
-            <span style="font-family:var(--mono);font-size:12px;font-weight:500;color:var(--orange);background:rgba(255,107,43,0.08);padding:3px 9px;border-radius:5px;">9 / 10</span>
+      <article class="who-card">
+        <span class="who-card-kicker">FX and Remittance</span>
+        <h3 class="who-card-title">Cross-border payment platforms</h3>
+        <p class="who-card-body">Diaspora businesses comparing corridors, hitting bank blocks, searching for better rates — posting publicly every single day. Find them before your competitors do.</p>
+        <div class="who-signal">
+          <p class="who-signal-quote">"Bank blocked my $45k CAD Lagos supplier payment again. Third time this month. Anyone know a better cross-border solution?"</p>
+          <div class="who-signal-footer">
+            <span class="who-signal-label">Real signal</span>
+            <span class="who-signal-score">9 / 10</span>
           </div>
         </div>
       </article>
 
-      <article style="display:flex;flex-direction:column;gap:24px;transition:transform 0.4s var(--ease);" onmouseenter="this.style.transform='translateY(-8px)'" onmouseleave="this.style.transform=''">
-        <span style="font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-4);padding-bottom:24px;border-bottom:1px solid var(--line);display:block;">Crypto and Digital Assets</span>
-        <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.025em;line-height:1.2;color:var(--ink);">Exchanges and payment rails</h3>
-        <p style="font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-3);flex:1;">Merchants comparing exchanges, frustrated with fees and failed KYC. On Twitter right now. We identify who they are and write exactly what you should say to them.</p>
-        <div style="background:var(--off);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;border:1px solid var(--line);transition:transform 0.35s var(--ease),box-shadow 0.35s var(--ease),border-color 0.35s;">
-          <p style="font-size:13px;line-height:1.6;color:var(--ink-2);font-style:italic;">"Tried three crypto exchanges this month. Fees are insane. Anyone know a platform that actually works for Canadian businesses?"</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-family:var(--mono);font-size:10px;color:var(--ink-5);letter-spacing:0.06em;text-transform:uppercase;">Real signal</span>
-            <span style="font-family:var(--mono);font-size:12px;font-weight:500;color:var(--orange);background:rgba(255,107,43,0.08);padding:3px 9px;border-radius:5px;">8 / 10</span>
+      <article class="who-card">
+        <span class="who-card-kicker">Crypto and Digital Assets</span>
+        <h3 class="who-card-title">Exchanges and payment rails</h3>
+        <p class="who-card-body">Merchants comparing exchanges, frustrated with fees and failed KYC. On Twitter right now. We identify who they are and write exactly what you should say to them.</p>
+        <div class="who-signal">
+          <p class="who-signal-quote">"Tried three crypto exchanges this month. Fees are insane. Anyone know a platform that actually works for Canadian businesses?"</p>
+          <div class="who-signal-footer">
+            <span class="who-signal-label">Real signal</span>
+            <span class="who-signal-score">8 / 10</span>
           </div>
         </div>
       </article>
 
-      <article style="display:flex;flex-direction:column;gap:24px;transition:transform 0.4s var(--ease);" onmouseenter="this.style.transform='translateY(-8px)'" onmouseleave="this.style.transform=''">
-        <span style="font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-4);padding-bottom:24px;border-bottom:1px solid var(--line);display:block;">B2B Payments and Banking</span>
-        <h3 style="font-size:21px;font-weight:600;letter-spacing:-0.025em;line-height:1.2;color:var(--ink);">Neobanks and payment infrastructure</h3>
-        <p style="font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-3);flex:1;">Business owners whose international payments fail mid-transaction. Their supplier is waiting. They need a solution right now. That urgency is visible in every word they post.</p>
-        <div style="background:var(--off);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;border:1px solid var(--line);transition:transform 0.35s var(--ease),box-shadow 0.35s var(--ease),border-color 0.35s;">
-          <p style="font-size:13px;line-height:1.6;color:var(--ink-2);font-style:italic;">"Wise Business failed me again. Payment delayed 2 weeks. My supplier is threatening to cancel. Need an alternative urgently."</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-family:var(--mono);font-size:10px;color:var(--ink-5);letter-spacing:0.06em;text-transform:uppercase;">Real signal</span>
-            <span style="font-family:var(--mono);font-size:12px;font-weight:500;color:var(--orange);background:rgba(255,107,43,0.08);padding:3px 9px;border-radius:5px;">10 / 10</span>
+      <article class="who-card">
+        <span class="who-card-kicker">B2B Payments and Banking</span>
+        <h3 class="who-card-title">Neobanks and payment infrastructure</h3>
+        <p class="who-card-body">Business owners whose international payments fail mid-transaction. Their supplier is waiting. They need a solution right now. That urgency is visible in every word they post.</p>
+        <div class="who-signal">
+          <p class="who-signal-quote">"Wise Business failed me again. Payment delayed 2 weeks. My supplier is threatening to cancel. Need an alternative urgently."</p>
+          <div class="who-signal-footer">
+            <span class="who-signal-label">Real signal</span>
+            <span class="who-signal-score">10 / 10</span>
           </div>
         </div>
       </article>
@@ -1105,47 +1491,47 @@ footer {
 </section>
 
 <!-- ══ TIERS ══ -->
-<section id="tiers" aria-labelledby="tiers-h" style="padding:160px 32px;background:var(--off);border-top:1px solid var(--line);">
-  <div style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1.2fr;gap:120px;align-items:start;">
-    <div style="position:sticky;top:80px;display:flex;flex-direction:column;gap:24px;" class="r">
-      <span style="font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-4);display:block;">Intelligence tiers</span>
-      <h2 style="font-family:var(--serif);font-size:clamp(36px,4.5vw,56px);font-weight:500;letter-spacing:-0.04em;line-height:1.08;color:var(--ink);" id="tiers-h">Every signal scored.<br>Every alert <em style="font-weight:300;color:var(--ink-3);">earned.</em></h2>
-      <p style="font-size:16px;font-weight:300;line-height:1.7;color:var(--ink-3);">Not every post deserves the same urgency. Flintel scores each signal 0 to 10 and routes it accordingly — so your team always knows exactly how to prioritise.</p>
+<section id="tiers" aria-labelledby="tiers-h">
+  <div class="tiers-inner">
+    <div class="tiers-sticky r">
+      <span class="tiers-kicker">Intelligence tiers</span>
+      <h2 class="tiers-h" id="tiers-h">Every signal scored.<br>Every alert <em>earned.</em></h2>
+      <p class="tiers-sub">Not every post deserves the same urgency. Flintel scores each signal 0 to 10 and routes it accordingly — so your team always knows exactly how to prioritise.</p>
     </div>
-    <div style="display:flex;flex-direction:column;" class="r d1" role="list">
+    <div class="tier-list r d1" role="list">
 
-      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s,transform 0.3s var(--ease);align-items:start;position:relative;" onmouseenter="this.style.background='#fff';this.style.transform='translateX(4px)'" onmouseleave="this.style.background='';this.style.transform=''" tabindex="0">
-        <span style="font-family:var(--mono);font-size:13px;color:var(--ink);font-weight:500;padding-top:3px;">8–10</span>
-        <div style="display:flex;flex-direction:column;gap:5px;">
-          <h3 style="font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);display:flex;align-items:center;gap:10px;flex-wrap:wrap;">Immediate <span class="tc-orange" style="font-size:11px;font-weight:500;padding:3px 10px;border-radius:6px;background:rgba(255,107,43,0.10);color:var(--orange);">Instant Slack alert</span></h3>
-          <p style="font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-3);">Active buyer right now. Competitor frustration confirmed, specific amount mentioned, urgency expressed. Delivered with a ready-to-send outreach script in under 90 seconds.</p>
+      <article class="tier-item" role="listitem" tabindex="0">
+        <span class="tier-score">8–10</span>
+        <div>
+          <h3 class="tier-name">Immediate <span class="tc-orange tier-badge-orange">Instant Slack alert</span></h3>
+          <p class="tier-desc">Active buyer right now. Competitor frustration confirmed, specific amount mentioned, urgency expressed. Delivered with a ready-to-send outreach script in under 90 seconds.</p>
         </div>
       </article>
-      <div style="height:1px;background:var(--line);margin:4px 20px;"></div>
+      <div class="tier-divider"></div>
 
-      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s,transform 0.3s var(--ease);align-items:start;" onmouseenter="this.style.background='#fff';this.style.transform='translateX(4px)'" onmouseleave="this.style.background='';this.style.transform=''" tabindex="0">
-        <span style="font-family:var(--mono);font-size:13px;color:var(--ink-4);padding-top:3px;">5–7</span>
-        <div style="display:flex;flex-direction:column;gap:5px;">
-          <h3 style="font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);display:flex;align-items:center;gap:10px;flex-wrap:wrap;">Digest <span style="font-size:11px;font-weight:500;padding:3px 10px;border-radius:6px;background:var(--blue-dim);color:var(--blue);">Daily 8am brief</span></h3>
-          <p style="font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-3);">Researching solutions. No immediate crisis but genuinely interested. Collected throughout the day, delivered as a prioritised morning brief with full context intact.</p>
+      <article class="tier-item" role="listitem" tabindex="0">
+        <span class="tier-score tier-score-dim">5–7</span>
+        <div>
+          <h3 class="tier-name">Digest <span class="tier-badge-blue">Daily 8am brief</span></h3>
+          <p class="tier-desc">Researching solutions. No immediate crisis but genuinely interested. Collected throughout the day, delivered as a prioritised morning brief with full context intact.</p>
         </div>
       </article>
-      <div style="height:1px;background:var(--line);margin:4px 20px;"></div>
+      <div class="tier-divider"></div>
 
-      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s,transform 0.3s var(--ease);align-items:start;" onmouseenter="this.style.background='#fff';this.style.transform='translateX(4px)'" onmouseleave="this.style.background='';this.style.transform=''" tabindex="0">
-        <span style="font-family:var(--mono);font-size:13px;color:var(--ink-4);padding-top:3px;">3–4</span>
-        <div style="display:flex;flex-direction:column;gap:5px;">
-          <h3 style="font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);display:flex;align-items:center;gap:10px;flex-wrap:wrap;">Watchlist <span style="font-size:11px;font-weight:500;padding:3px 10px;border-radius:6px;background:var(--off);color:var(--ink-3);border:1px solid var(--line);">Silent monitoring</span></h3>
-          <p style="font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-3);">Not a buyer today but will be in 30 to 60 days. Monitored silently. Escalated automatically the moment intent spikes into actionable territory.</p>
+      <article class="tier-item" role="listitem" tabindex="0">
+        <span class="tier-score tier-score-dim">3–4</span>
+        <div>
+          <h3 class="tier-name">Watchlist <span class="tier-badge-neutral">Silent monitoring</span></h3>
+          <p class="tier-desc">Not a buyer today but will be in 30 to 60 days. Monitored silently. Escalated automatically the moment intent spikes into actionable territory.</p>
         </div>
       </article>
-      <div style="height:1px;background:var(--line);margin:4px 20px;"></div>
+      <div class="tier-divider"></div>
 
-      <article role="listitem" style="display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 20px;border-radius:16px;transition:background 0.2s,transform 0.3s var(--ease);align-items:start;" onmouseenter="this.style.background='#fff';this.style.transform='translateX(4px)'" onmouseleave="this.style.background='';this.style.transform=''" tabindex="0">
-        <span style="font-family:var(--mono);font-size:13px;color:var(--ink-5);padding-top:3px;">0–2</span>
-        <div style="display:flex;flex-direction:column;gap:5px;">
-          <h3 style="font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink-3);display:flex;align-items:center;gap:10px;flex-wrap:wrap;">Discarded <span style="font-size:11px;font-weight:500;padding:3px 10px;border-radius:6px;background:var(--off);color:var(--ink-5);border:1px solid var(--line);">Never shown</span></h3>
-          <p style="font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-4);">Consumer subscriptions, wrong geography, personal payments. Eliminated before AI ever processes them. Zero cost. Zero noise for your team. Ever.</p>
+      <article class="tier-item" role="listitem" tabindex="0">
+        <span class="tier-score tier-score-dimmer">0–2</span>
+        <div>
+          <h3 class="tier-name tier-name-dim">Discarded <span class="tier-badge-neutral" style="color:var(--ink-5);">Never shown</span></h3>
+          <p class="tier-desc tier-desc-dim">Consumer subscriptions, wrong geography, personal payments. Eliminated before AI ever processes them. Zero cost. Zero noise for your team. Ever.</p>
         </div>
       </article>
 
@@ -1234,6 +1620,34 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('solid', window.scrollY > 20);
 }, { passive: true });
+
+/* ── MOBILE NAV DRAWER ── */
+const hamburger = document.getElementById('nav-hamburger');
+const drawer = document.getElementById('nav-drawer');
+
+function toggleDrawer(force) {
+  const open = force !== undefined ? force : !hamburger.classList.contains('open');
+  hamburger.classList.toggle('open', open);
+  drawer.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+
+hamburger.addEventListener('click', () => toggleDrawer());
+
+document.querySelectorAll('[data-drawer-close]').forEach(el => {
+  el.addEventListener('click', () => toggleDrawer(false));
+});
+
+// Close on outside click
+drawer.addEventListener('click', e => {
+  if (e.target === drawer) toggleDrawer(false);
+});
+
+// Close on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && drawer.classList.contains('open')) toggleDrawer(false);
+});
 
 /* ── SIGNAL DATA ── */
 const signals = [
@@ -1376,15 +1790,19 @@ hero.addEventListener('pointerleave', () => hero.classList.remove('glow-active')
 /* ── LIVE CARD 3D TILT ── */
 const liveCard = document.querySelector('.live-card');
 if (liveCard) {
-  liveCard.addEventListener('pointermove', (e) => {
-    const r = liveCard.getBoundingClientRect();
-    const px = (e.clientX - r.left) / r.width - 0.5;
-    const py = (e.clientY - r.top) / r.height - 0.5;
-    liveCard.style.transform = `perspective(1200px) rotateY(${px * 4}deg) rotateX(${-py * 4}deg) translateY(-4px)`;
-  });
-  liveCard.addEventListener('pointerleave', () => {
-    liveCard.style.transform = '';
-  });
+  // Only apply tilt on non-touch devices
+  const isTouch = window.matchMedia('(hover: none)').matches;
+  if (!isTouch) {
+    liveCard.addEventListener('pointermove', (e) => {
+      const r = liveCard.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      liveCard.style.transform = `perspective(1200px) rotateY(${px * 4}deg) rotateX(${-py * 4}deg) translateY(-4px)`;
+    });
+    liveCard.addEventListener('pointerleave', () => {
+      liveCard.style.transform = '';
+    });
+  }
 }
 
 /* ── CTA PARTICLES ── */
@@ -1412,10 +1830,10 @@ function staggerReveal(selector, step = 70) {
     el.style.transitionDelay = (i * step) + 'ms';
   });
 }
-staggerReveal('#sources article');
-staggerReveal('#who article');
-staggerReveal('#tiers article');
-staggerReveal('#how article');
+staggerReveal('.source-row');
+staggerReveal('.who-card');
+staggerReveal('.tier-item');
+staggerReveal('.how-step');
 
 document.querySelectorAll('.r').forEach(el => {
   if (!el.classList.contains('in')) ro.observe(el);
@@ -1431,6 +1849,8 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     const t = document.querySelector(a.getAttribute('href'));
     if (!t) return;
     e.preventDefault();
+    // Close mobile drawer if open
+    if (drawer.classList.contains('open')) toggleDrawer(false);
     t.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
